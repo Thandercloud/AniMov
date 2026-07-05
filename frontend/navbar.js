@@ -104,7 +104,7 @@ function renderNavbar() {
             <div class="header-main-row">
                 <!-- Logo on the left -->
                 <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
-                    <i class="fas fa-circle-play"></i>
+                    <i class="fas fa-film"></i>
                     <span>MovAni</span>
                 </div>
                 
