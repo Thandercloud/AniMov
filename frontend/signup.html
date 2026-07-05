@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - MovAni</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="forms.css">
+    <link rel="shortcut icon" href="faviconofmovieanime.png" type="image/x-icon">
+</head>
+<body>
+    <header class="header"></header>
+
+    <main class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1><i class="fas fa-user-plus"></i> Join MovAni</h1>
+                <p>Create your free account and start sharing your reviews</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab" onclick="showTab('login')">Login</button>
+                <button class="auth-tab active" onclick="showTab('signup')">Sign Up</button>
+            </div>
+            
+            <div id="login-form" class="auth-form-container">
+                <form id="loginForm" class="auth-form">
+                    <div class="social-login">
+                        <button type="button" class="social-btn google-btn">
+                            <i class="fab fa-google"></i> Continue with Google
+                        </button>
+                        <button type="button" class="social-btn github-btn">
+                            <i class="fab fa-github"></i> Continue with GitHub
+                        </button>
+                    </div>
+                    
+                    <div class="divider">
+                        <span>or use email</span>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="login-email">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <input type="email" id="login-email" name="email" required placeholder="you@example.com">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="login-password">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <input type="password" id="login-password" name="password" required placeholder="••••••••">
+                        <div class="password-toggle">
+                            <i class="fas fa-eye" id="toggle-login-password"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox">
+                            <input type="checkbox" name="remember"> Remember me
+                        </label>
+                        <a href="#forgot-password" class="forgot-link">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="auth-submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                    
+                    <div class="auth-footer">
+                        Don't have an account? 
+                        <a href="signup.html" class="switch-link">Sign up here</a>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="signup-form" class="auth-form-container active">
+                <div class="signup-steps">
+                    <div class="step active" data-step="1">1</div>
+                    <div class="step-line"></div>
+                    <div class="step" data-step="2">2</div>
+                    <div class="step-line"></div>
+                    <div class="step" data-step="3">3</div>
+                </div>
+                
+                <form id="signupForm" class="auth-form">
+                    <div class="form-step active" id="step-1">
+                        <h3><i class="fas fa-user"></i> Create Your Profile</h3>
+                        
+                        <div class="avatar-upload">
+                            <div class="avatar-preview" id="avatar-preview">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <input type="file" id="avatar-input" accept="image/*" hidden>
+                            <button type="button" class="avatar-upload-btn" onclick="document.getElementById('avatar-input').click()">
+                                <i class="fas fa-camera"></i> Upload Photo
+                            </button>
+                            <p class="avatar-hint">Optional. Max 2MB. JPG, PNG, or GIF.</p>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="signup-username">
+                                <i class="fas fa-user"></i> Username *
+                            </label>
+                            <input type="text" id="signup-username" name="username" required placeholder="Choose a unique username">
+                            <div class="input-hint">
+                                This will be your public display name
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="signup-display-name">
+                                <i class="fas fa-id-card"></i> Display Name
+                            </label>
+                            <input type="text" id="signup-display-name" name="displayName" placeholder="How you want to be seen">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="next-step-btn" onclick="nextStep(2)">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-step" id="step-2">
+                        <h3><i class="fas fa-envelope"></i> Account Details</h3>
+                        
+                        <div class="input-group">
+                            <label for="signup-email">
+                                <i class="fas fa-envelope"></i> Email Address *
+                            </label>
+                            <input type="email" id="signup-email" name="email" required placeholder="you@example.com">
+                            <div class="input-hint">
+                                We'll send a verification email to this address
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="signup-password">
+                                <i class="fas fa-lock"></i> Password *
+                            </label>
+                            <input type="password" id="signup-password" name="password" required placeholder="••••••••">
+                            <div class="password-toggle">
+                                <i class="fas fa-eye" id="toggle-signup-password"></i>
+                            </div>
+                            <div class="password-strength">
+                                <div class="strength-bar"></div>
+                                <span class="strength-text">Password strength</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="confirm-password">
+                                <i class="fas fa-lock"></i> Confirm Password *
+                            </label>
+                            <input type="password" id="confirm-password" name="confirmPassword" required placeholder="••••••••">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="prev-step-btn" onclick="prevStep(1)">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <button type="button" class="next-step-btn" onclick="nextStep(3)">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-step" id="step-3">
+                        <h3><i class="fas fa-sliders-h"></i> Preferences</h3>
+                        
+                        <div class="preferences-section">
+                            <h4><i class="fas fa-heart"></i> Your Interests</h4>
+                            <p>Select your favorite genres to get personalized recommendations</p>
+                            
+                            <div class="genre-preferences" id="genre-preferences">
+                                <span class="genre-pref" data-genre="action">Action</span>
+                                <span class="genre-pref" data-genre="adventure">Adventure</span>
+                                <span class="genre-pref" data-genre="animation">Animation</span>
+                                <span class="genre-pref" data-genre="comedy">Comedy</span>
+                                <span class="genre-pref" data-genre="drama">Drama</span>
+                                <span class="genre-pref" data-genre="fantasy">Fantasy</span>
+                                <span class="genre-pref" data-genre="horror">Horror</span>
+                                <span class="genre-pref" data-genre="scifi">Sci-Fi</span>
+                                <span class="genre-pref" data-genre="romance">Romance</span>
+                                <span class="genre-pref" data-genre="thriller">Thriller</span>
+                                <span class="genre-pref" data-genre="mystery">Mystery</span>
+                                <span class="genre-pref" data-genre="documentary">Documentary</span>
+                            </div>
+                        </div>
+                        
+                        <div class="preferences-section">
+                            <h4><i class="fas fa-film"></i> Content Preferences</h4>
+                            
+                            <label class="checkbox">
+                                <input type="checkbox" name="pref-movies" checked>
+                                Show me movies in recommendations
+                            </label>
+                            
+                            <label class="checkbox">
+                                <input type="checkbox" name="pref-anime" checked>
+                                Show me anime in recommendations
+                            </label>
+                            
+                            <label class="checkbox">
+                                <input type="checkbox" name="pref-tvshows">
+                                Show me TV shows in recommendations
+                            </label>
+                        </div>
+                        
+                        <div class="preferences-section">
+                            <h4><i class="fas fa-bell"></i> Notifications</h4>
+                            
+                            <label class="checkbox">
+                                <input type="checkbox" name="notif-reviews" checked>
+                                Email me when someone replies to my reviews
+                            </label>
+                            
+                            <label class="checkbox">
+                                <input type="checkbox" name="notif-recommendations">
+                                Send me weekly recommendations
+                            </label>
+                            
+                            <label class="checkbox">
+                                <input type="checkbox" name="notif-newsletter" checked>
+                                Subscribe to newsletter
+                            </label>
+                        </div>
+                        
+                        <div class="form-options terms-section">
+                            <label class="checkbox">
+                                <input type="checkbox" name="terms" required>
+                                I agree to the <a href="#terms">Terms of Service</a> and <a href="#privacy">Privacy Policy</a> *
+                            </label>
+                            
+                            <label class="checkbox">
+                                <input type="checkbox" name="age" required>
+                                I confirm that I am at least 13 years old *
+                            </label>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="prev-step-btn" onclick="prevStep(2)">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                            <button type="submit" class="auth-submit-btn">
+                                <i class="fas fa-check-circle"></i> Create Account
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="verification-modal" class="modal">
+        <div class="modal-content auth-modal">
+            <div class="verification-icon">
+                <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <h2>Check Your Email!</h2>
+            <p>We've sent a verification link to your email address. Please click the link to verify your account and start using MovAni.</p>
+            
+            <div class="verification-actions">
+                <button class="auth-submit-btn" onclick="resendVerification()">
+                    <i class="fas fa-redo"></i> Resend Verification
+                </button>
+                <button class="auth-submit-btn secondary" onclick="closeVerificationModal()">
+                    <i class="fas fa-check"></i> Got it!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MovAni</h3>
+                <p>Join our community of movie and anime enthusiasts</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#movies">Movies</a>
+                <a href="index.html#anime">Anime</a>
+                <a href="login.html">Sign In</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MovAni. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="navbar.js"></script>
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

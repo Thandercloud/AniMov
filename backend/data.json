@@ -1,0 +1,84 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "Dune: Part Two",
+      "type": "movie",
+      "year": 2024,
+      "rating": 9.2,
+      "poster": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "banner": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "runtime": "166 min",
+      "genres": ["Sci-Fi", "Adventure", "Drama"],
+      "synopsis": "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+      "status": "Released",
+      "trailer": "https://www.youtube.com/embed/Way9Dexny3w",
+      "director": "Denis Villeneuve",
+      "cast": ["Timothée Chalamet", "Zendaya", "Rebecca Ferguson"]
+    },
+    {
+      "id": 2,
+      "title": "Spider-Man: Across the Spider-Verse",
+      "type": "movie",
+      "year": 2023,
+      "rating": 9.0,
+      "poster": "https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "runtime": "140 min",
+      "genres": ["Animation", "Action", "Adventure"],
+      "synopsis": "Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People.",
+      "status": "Released"
+    }
+  ],
+  "anime": [
+    {
+      "id": 101,
+      "title": "Attack on Titan: Final Season",
+      "type": "anime",
+      "year": 2023,
+      "rating": 9.8,
+      "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "banner": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "episodes": 28,
+      "genres": ["Action", "Drama", "Fantasy"],
+      "synopsis": "The epic conclusion to the war between Paradis and Marley as Eren's plan reaches its climax.",
+      "status": "Completed",
+      "trailer": "https://www.youtube.com/embed/M_OauHnAFc8",
+      "studio": "MAPPA"
+    },
+    {
+      "id": 102,
+      "title": "Demon Slayer: Kimetsu no Yaiba",
+      "type": "anime",
+      "year": 2023,
+      "rating": 9.3,
+      "poster": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "episodes": 55,
+      "genres": ["Action", "Supernatural", "Historical"],
+      "synopsis": "Tanjiro Kamado's journey to turn his sister back into a human and defeat the demon Muzan Kibutsuji.",
+      "status": "Ongoing"
+    }
+  ],
+  "trending": [1, 101, 2, 102],
+  "reviews": [
+    {
+      "id": 1001,
+      "movieId": 1,
+      "user": "FilmCritic88",
+      "avatar": "FC",
+      "rating": 9.5,
+      "content": "Villeneuve has created a sci-fi epic that will be remembered for generations.",
+      "date": "2024-03-15",
+      "likes": 245
+    },
+    {
+      "id": 1002,
+      "movieId": 101,
+      "user": "AnimeFan42",
+      "avatar": "AF",
+      "rating": 10,
+      "content": "Isayama's masterful storytelling combined with MAPPA's animation created perfection.",
+      "date": "2023-11-10",
+      "likes": 892
+    }
+  ]
+}

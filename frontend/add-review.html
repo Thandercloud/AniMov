@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a Review - MovAni</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="forms.css">
+    <link rel="shortcut icon" href="faviconofmovieanime.png" type="image/x-icon">
+    <style>
+        /* Modern centered single-column layout style definitions */
+        .review-dashboard {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .review-header {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .review-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* Glassmorphic card design */
+        .card-container {
+            background: rgba(30, 30, 46, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Login Prompt Card styling */
+        .login-prompt-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            border: 1px dashed rgba(0, 198, 255, 0.3);
+            background: rgba(0, 198, 255, 0.03);
+            display: none; /* Controlled dynamically by JS */
+        }
+
+        .login-prompt-card i.lock-icon {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            text-shadow: 0 0 15px rgba(0, 198, 255, 0.4);
+        }
+
+        .login-prompt-card h3 {
+            font-size: 1.6rem;
+            color: var(--text);
+            margin-bottom: 0.8rem;
+        }
+
+        .login-prompt-card p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        .login-redirect-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.9rem 2.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05rem;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .login-redirect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 198, 255, 0.5);
+        }
+
+        /* Add review form styling */
+        .add-review-section {
+            display: none; /* Controlled dynamically by JS */
+        }
+
+        /* Autocomplete dropdown selection */
+        .autocomplete-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .autocomplete-dropdown {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            right: 0;
+            background: var(--dark-alt);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            z-index: 100;
+            max-height: 250px;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none;
+        }
+
+        .autocomplete-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s ease;
+        }
+
+        .autocomplete-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .autocomplete-item img {
+            width: 35px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .autocomplete-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .autocomplete-title {
+            font-weight: bold;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .autocomplete-meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Selected movie badge */
+        .selected-badge {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 198, 255, 0.1);
+            border: 1px solid var(--accent);
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        #selected-title-text {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        #clear-selected-title {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        #clear-selected-title:hover {
+            color: var(--rating-low);
+        }
+
+        /* Interactive rating stars */
+        .rating-picker {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .stars-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .stars-container i.star-btn {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .stars-container i.star-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .stars-container i.star-btn.active {
+            color: #ffb800;
+        }
+
+        .rating-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Form details formatting */
+        .required {
+            color: var(--rating-low);
+            margin-left: 2px;
+        }
+
+        .error-msg {
+            color: var(--rating-low);
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            display: none;
+            font-weight: 500;
+        }
+
+        .error-banner {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid var(--rating-low);
+            color: var(--rating-low);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .input-error {
+            border-color: var(--rating-low) !important;
+            background: rgba(255, 71, 87, 0.05) !important;
+        }
+
+        /* Form fields custom sizes */
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.95rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .submit-review-btn {
+            width: 100%;
+            padding: 1.05rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(142, 45, 226, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-review-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 45, 226, 0.6);
+        }
+
+        .submit-review-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Recent reviews section underneath */
+        .recent-reviews-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            background: linear-gradient(45deg, var(--accent), #00ff88);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+
+        .review-count-badge {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.25rem 0.8rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .reviews-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Review Cards styling */
+        .feed-review-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 1.8rem;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: slideUpIn 0.4s ease;
+        }
+
+        .feed-review-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .feed-review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .feed-review-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feed-user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.05rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .feed-user-name {
+            font-weight: bold;
+            color: var(--text);
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .feed-review-date {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .feed-review-rating {
+            display: flex;
+            gap: 3px;
+        }
+
+        .feed-review-rating i {
+            color: #ffb800;
+            font-size: 0.95rem;
+        }
+
+        .feed-review-rating i.far {
+            color: rgba(255,255,255,0.2);
+        }
+
+        .feed-movie-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-decoration: none;
+            margin-bottom: 0.8rem;
+            background: rgba(0, 198, 255, 0.08);
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .feed-movie-tag:hover {
+            background: rgba(0, 198, 255, 0.15);
+        }
+
+        .feed-review-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0 0 0.6rem 0;
+        }
+
+        .feed-review-text {
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin: 0;
+            font-size: 0.98rem;
+            white-space: pre-line;
+        }
+
+        /* Loading / Empty States */
+        .feed-loading, .feed-empty {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.01);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .feed-loading i {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+        }
+
+        /* Animations & Responsive Tweaks */
+        @keyframes slideUpIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Segment Tabs styling */
+        .segment-tabs {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .segment-tab {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.4rem 1rem;
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .segment-tab:hover {
+            color: var(--text);
+        }
+
+        .segment-tab.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 2px 10px rgba(142, 45, 226, 0.3);
+        }
+
+        /* Mobile specific style tweaks */
+        @media (max-width: 768px) {
+            .review-dashboard {
+                margin: 1rem auto;
+                padding: 0 1rem;
+                gap: 1.8rem;
+            }
+
+            .card-container {
+                padding: 1.5rem;
+                border-radius: 15px;
+            }
+
+            .feed-review-card {
+                padding: 1.4rem;
+                border-radius: 12px;
+            }
+
+            .review-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header"></header>
+
+    <main class="review-dashboard">
+        <div class="review-header">
+            <h1><i class="fas fa-edit"></i> Write a Review</h1>
+            <p>Share your experience and ratings with the MovAni community</p>
+        </div>
+        
+        <!-- Section 1: Authentication Locked Add Review Form -->
+        <section id="add-review-card" class="card-container add-review-section">
+            <!-- Global error display (e.g. duplicate reviews) -->
+            <div id="form-error-banner" class="error-banner">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="error-banner-text">Error message text</span>
+            </div>
+
+            <form id="review-form" novalidate>
+                <!-- Title Selection -->
+                <div class="form-group search-group">
+                    <label for="title-search"><i class="fas fa-search"></i> Select Movie or Anime <span class="required">*</span></label>
+                    <div class="autocomplete-container">
+                        <input type="text" id="title-search" placeholder="Type title name to search..." autocomplete="off">
+                        <div id="search-results-dropdown" class="autocomplete-dropdown"></div>
+                    </div>
+                    <div id="selected-title-badge" class="selected-badge" style="display: none;">
+                        <span id="selected-title-text">No title selected</span>
+                        <button type="button" id="clear-selected-title" title="Clear selection">&times;</button>
+                    </div>
+                    <div class="error-msg" id="err-title">Please select a title to review.</div>
+                </div>
+
+                <!-- Rating -->
+                <div class="form-group">
+                    <label><i class="fas fa-star"></i> Rating <span class="required">*</span></label>
+                    <div class="rating-picker">
+                        <div class="stars-container" id="stars-container">
+                            <i class="far fa-star star-btn" data-value="1"></i>
+                            <i class="far fa-star star-btn" data-value="2"></i>
+                            <i class="far fa-star star-btn" data-value="3"></i>
+                            <i class="far fa-star star-btn" data-value="4"></i>
+                            <i class="far fa-star star-btn" data-value="5"></i>
+                        </div>
+                        <span class="rating-label" id="rating-label">Select a rating</span>
+                    </div>
+                    <div class="error-msg" id="err-rating">Rating is required.</div>
+                </div>
+
+                <!-- Review Title -->
+                <div class="form-group">
+                    <label for="review-title"><i class="fas fa-heading"></i> Review Title</label>
+                    <input type="text" id="review-title" placeholder="Summarize your review in a few words...">
+                </div>
+
+                <!-- Review Description -->
+                <div class="form-group">
+                    <label for="review-content"><i class="fas fa-align-left"></i> Review Description <span class="required">*</span></label>
+                    <textarea id="review-content" rows="5" placeholder="Write your detailed review here..."></textarea>
+                    <div class="error-msg" id="err-content">Review description is required.</div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submit-review-btn" class="submit-review-btn">
+                    <span class="btn-text"><i class="fas fa-paper-plane"></i> Submit Review</span>
+                    <span class="btn-spinner" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Submitting...</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- Section 2: Login Prompt Card if unauthenticated -->
+        <section id="login-prompt-card" class="card-container login-prompt-card">
+            <i class="fas fa-lock lock-icon"></i>
+            <h3>Please log in to submit a review</h3>
+            <p>You must be an authenticated user to write and publish reviews on MovAni.</p>
+            <a href="login.html" class="login-redirect-btn"><i class="fas fa-sign-in-alt"></i> Go to Login</a>
+        </section>
+
+        <!-- Section 3: Recent Reviews Feed (Below Form) -->
+        <section class="recent-reviews-section">
+            <div class="section-header">
+                <h2><i class="fas fa-comments"></i> Recent Reviews</h2>
+                <div class="segment-tabs" id="segment-tabs">
+                    <button class="segment-tab active" data-segment="all">All</button>
+                    <button class="segment-tab" data-segment="movie">Movies</button>
+                    <button class="segment-tab" data-segment="anime">Anime</button>
+                </div>
+                <span class="review-count-badge" id="reviews-count">0</span>
+            </div>
+            <div id="reviews-list" class="reviews-list-container">
+                <div class="feed-loading">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                    <div>Loading reviews...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Review Published!</h2>
+            <p>Your review has been successfully submitted to the community.</p>
+            
+            <div class="success-actions">
+                <button class="success-btn primary" onclick="viewSelectedReview()">
+                    <i class="fas fa-eye"></i> View Movie Details
+                </button>
+                <button class="success-btn secondary" onclick="writeAnotherReview()">
+                    <i class="fas fa-plus"></i> Write Another
+                </button>
+                <button class="success-btn" onclick="goHome()">
+                    <i class="fas fa-home"></i> Go Home
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MovAni</h3>
+                <p>Share your thoughts and help others discover great movies and anime.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Review Guidelines</h3>
+                <a href="#guidelines">Be Respectful</a>
+                <a href="#guidelines">No Spoilers</a>
+                <a href="#guidelines">Be Constructive</a>
+                <a href="#guidelines">Stay On Topic</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MovAni. All reviews are user-submitted opinions.</p>
+        </div>
+    </footer>
+
+    <script src="navbar.js"></script>
+    <script src="script.js"></script>
+    <script src="add-review.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Watchlist - MovAni</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="forms.css">
+    <link rel="shortcut icon" href="faviconofmovieanime.png" type="image/x-icon">
+</head>
+<body>
+    <header class="header"></header>
+
+    <main class="watchlist-container">
+        <div class="section-header">
+            <h1><i class="fas fa-bookmark"></i> My Watchlist</h1>
+            <div class="watchlist-stats">
+                <span class="stat-item">
+                    <i class="fas fa-film"></i>
+                    <span id="total-count">0</span> Titles
+                </span>
+                <span class="stat-item">
+                    <i class="fas fa-clock"></i>
+                    <span id="total-time">0</span> Hours
+                </span>
+                <span class="stat-item">
+                    <i class="fas fa-star"></i>
+                    Avg: <span id="avg-rating">0</span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="watchlist-filters">
+            <select id="watchlist-sort">
+                <option value="added">Recently Added</option>
+                <option value="title-asc">Title A-Z</option>
+                <option value="title-desc">Title Z-A</option>
+                <option value="rating-desc">Rating High-Low</option>
+                <option value="rating-asc">Rating Low-High</option>
+            </select>
+            
+            <select id="watchlist-filter">
+                <option value="all">All Types</option>
+                <option value="movie">Movies</option>
+                <option value="anime">Anime</option>
+                <option value="tv">TV Shows</option>
+            </select>
+            
+            <select id="watchlist-status">
+                <option value="all">All Status</option>
+                <option value="unwatched">Plan To Watch</option>
+                <option value="watching">Watching</option>
+                <option value="completed">Completed</option>
+                <option value="dropped">Dropped</option>
+            </select>
+        </div>
+        
+        <div class="watchlist-grid" id="watchlist-content"></div>
+        
+        <div class="empty-watchlist" id="empty-watchlist" style="display: none;">
+            <i class="fas fa-bookmark fa-5x"></i>
+            <h2>Your watchlist is empty</h2>
+            <p>Start adding movies and anime you want to watch!</p>
+            <a href="index.html" class="btn-watch">Browse Titles</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MovAni</h3>
+                <p>Your ultimate destination for movie and anime reviews.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-reddit"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="#movies">Movies</a>
+                <a href="#anime">Anime</a>
+                <a href="add-review.html">Write Review</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MovAni. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="navbar.js"></script>
+    <script src="script.js"></script>
+    <script src="watchlist.js"></script>
+</body>
+</html>
