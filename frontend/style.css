@@ -75,7 +75,7 @@ body {
 }
 
 .logo i {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
 }
 
 .nav.desktop-nav {
@@ -99,7 +99,7 @@ body {
 }
 
 .nav a i {
-    font-size: 0.85em;
+    font-size: 0.8em;
 }
 
 .nav a:hover,
@@ -231,7 +231,7 @@ body {
     position: relative;
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: color 0.2s ease;
     display: inline-flex;
     align-items: center;
@@ -284,7 +284,7 @@ body {
 .nav-item-btn i,
 .add-review-btn i,
 .user-btn i {
-    font-size: 0.85em;
+    font-size: 0.8em;
 }
 
 .dropdown-menu {

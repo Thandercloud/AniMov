@@ -104,13 +104,12 @@ function renderNavbar() {
             <div class="header-main-row">
                 <!-- Logo on the left -->
                 <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
-                    <i class="fas fa-film"></i>
+                    <i class="fas fa-circle-play"></i>
                     <span>MovAni</span>
                 </div>
                 
                 <!-- Navigation links coming after logo -->
                 <nav class="nav desktop-nav">
-                    <a href="index.html" class="${isHomeActive}"><i class="fas fa-home"></i> Home</a>
                     <a href="index.html#movies"><i class="fas fa-video"></i> Movies</a>
                     <a href="index.html#anime"><i class="fas fa-dragon"></i> Anime</a>
                     <a href="index.html#trending"><i class="fas fa-fire"></i> Trending</a>
