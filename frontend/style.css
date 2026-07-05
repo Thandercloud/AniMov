@@ -289,17 +289,25 @@ body {
 
 .dropdown-menu {
     position: absolute;
-    top: calc(100% + 8px);
+    top: calc(100% + 4px);
     right: 0;
     background: var(--dark-alt);
     border-radius: 12px;
     padding: 0.6rem;
     display: none;
     flex-direction: column;
-    min-width: 180px;
+    min-width: 200px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.08);
     z-index: 1500;
+}
+
+.user-btn span {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 .user-dropdown:hover .dropdown-menu {
