@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     loadSimilarItems(item, data);
     initStarRating();
     initTrailerModal(item);
+    initShareModal(item);
     initTabs();
     checkAuthStatus();
 });
@@ -179,29 +180,207 @@ function renderItemReviews(reviews, container) {
         return;
     }
 
-    container.innerHTML = reviews.map(review => `
-        <div class="review-card">
-            <div class="review-header">
-                <div class="review-user-info">
-                    <div class="review-avatar">${escapeHTML(review.avatar)}</div>
-                    <div class="review-meta">
-                        <h4>${escapeHTML(review.user)}</h4>
-                        <span class="review-date">${formatReviewDate(review.date)}</span>
+    container.innerHTML = reviews.map(review => {
+        const likedReviews = JSON.parse(localStorage.getItem('likedReviews') || '[]');
+        const reviewId = review._id || String(review.id);
+        const isLiked = likedReviews.includes(reviewId);
+        const activeClass = isLiked ? ' active' : '';
+
+        const commentsListHTML = (review.comments || []).map(comment => `
+            <div class="comment-item">
+                <div class="comment-header">
+                    <div class="comment-user-info">
+                        <div class="comment-avatar">${escapeHTML(comment.avatar || 'A')}</div>
+                        <span class="comment-username">${escapeHTML(comment.user || 'Anonymous')}</span>
                     </div>
+                    <span class="comment-date">${formatReviewDate(comment.date)}</span>
                 </div>
-                <div class="review-rating">${review.rating}/10</div>
+                <p class="comment-content">${escapeHTML(comment.content)}</p>
             </div>
-            <p class="review-content">${escapeHTML(review.content)}</p>
-            <div class="review-actions">
-                <button class="review-action-btn">
-                    <i class="fas fa-thumbs-up"></i> ${review.likes || 0}
-                </button>
-                <button class="review-action-btn">
-                    <i class="fas fa-comment"></i> Reply
-                </button>
+        `).join('');
+
+        return `
+            <div class="review-card" data-review-id="${reviewId}">
+                <div class="review-header">
+                    <div class="review-user-info">
+                        <div class="review-avatar">${escapeHTML(review.avatar)}</div>
+                        <div class="review-meta">
+                            <h4>${escapeHTML(review.user)}</h4>
+                            <span class="review-date">${formatReviewDate(review.date)}</span>
+                        </div>
+                    </div>
+                    <div class="review-rating">${review.rating}/10</div>
+                </div>
+                <p class="review-content">${escapeHTML(review.content)}</p>
+                <div class="review-actions">
+                    <button class="review-action-btn like-btn${activeClass}">
+                        <i class="fas fa-thumbs-up"></i> <span class="likes-count">${review.likes || 0}</span>
+                    </button>
+                    <button class="review-action-btn reply-btn">
+                        <i class="fas fa-comment"></i> Reply (<span class="replies-count">${(review.comments || []).length}</span>)
+                    </button>
+                </div>
+                <div class="reply-section">
+                    <div class="comments-list">${commentsListHTML}</div>
+                    <form class="reply-form">
+                        <textarea class="reply-textarea" placeholder="Type your reply here..." required></textarea>
+                        <div class="reply-form-actions">
+                            <button type="button" class="reply-cancel-btn">Cancel</button>
+                            <button type="submit" class="reply-submit-btn">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
+
+    // Remove existing event listener if any to prevent duplicates
+    if (container._reviewHandler) {
+        container.removeEventListener('click', container._reviewHandler);
+    }
+
+    // Attach event handler
+    container._reviewHandler = async (e) => {
+        // 1. Like button click
+        const likeBtn = e.target.closest('.like-btn');
+        if (likeBtn) {
+            const card = likeBtn.closest('.review-card');
+            if (!card) return;
+            const reviewId = card.dataset.reviewId;
+            if (!reviewId) return;
+
+            let likedReviews = JSON.parse(localStorage.getItem('likedReviews') || '[]');
+            const isLiked = likedReviews.includes(reviewId);
+            const action = isLiked ? 'unlike' : 'like';
+
+            try {
+                const likesCountSpan = likeBtn.querySelector('.likes-count');
+                let currentLikes = parseInt(likesCountSpan.textContent) || 0;
+
+                if (isLiked) {
+                    likedReviews = likedReviews.filter(id => id !== reviewId);
+                    likeBtn.classList.remove('active');
+                    likesCountSpan.textContent = Math.max(0, currentLikes - 1);
+                } else {
+                    likedReviews.push(reviewId);
+                    likeBtn.classList.add('active');
+                    likesCountSpan.textContent = currentLikes + 1;
+                }
+                localStorage.setItem('likedReviews', JSON.stringify(likedReviews));
+
+                const response = await fetch(`/api/reviews/${reviewId}/like`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action })
+                });
+                const result = await response.json();
+                if (result.success && result.likes !== undefined) {
+                    likesCountSpan.textContent = result.likes;
+                }
+            } catch (err) {
+                console.error('Error toggling like:', err);
+            }
+            return;
+        }
+
+        // 2. Reply toggle button click
+        const replyBtn = e.target.closest('.reply-btn');
+        if (replyBtn) {
+            const card = replyBtn.closest('.review-card');
+            if (!card) return;
+            const replySection = card.querySelector('.reply-section');
+            if (!replySection) return;
+
+            const isExpanded = replySection.style.display === 'block';
+            replySection.style.display = isExpanded ? 'none' : 'block';
+            return;
+        }
+
+        // 3. Cancel button click
+        const cancelBtn = e.target.closest('.reply-cancel-btn');
+        if (cancelBtn) {
+            const card = cancelBtn.closest('.review-card');
+            if (!card) return;
+            const replySection = card.querySelector('.reply-section');
+            if (replySection) replySection.style.display = 'none';
+            return;
+        }
+    };
+
+    container.addEventListener('click', container._reviewHandler);
+
+    // Attach submit event listener for reply forms
+    container.querySelectorAll('.reply-form').forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const card = form.closest('.review-card');
+            if (!card) return;
+            const reviewId = card.dataset.reviewId;
+            if (!reviewId) return;
+
+            const textarea = form.querySelector('.reply-textarea');
+            const commentContent = textarea.value.trim();
+            if (!commentContent) return;
+
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                alert('You must be logged in to reply to a review.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const submitBtn = form.querySelector('.reply-submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            const payload = {
+                userId: currentUser.id,
+                user: currentUser.displayName || currentUser.username,
+                avatar: (currentUser.displayName || currentUser.username).substring(0, 2).toUpperCase(),
+                content: commentContent
+            };
+
+            try {
+                const response = await fetch(`/api/reviews/${reviewId}/comments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (response.status === 201 && result.success && result.comments) {
+                    const listContainer = card.querySelector('.comments-list');
+                    if (listContainer) {
+                        listContainer.innerHTML = result.comments.map(comment => `
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <div class="comment-user-info">
+                                        <div class="comment-avatar">${escapeHTML(comment.avatar || 'A')}</div>
+                                        <span class="comment-username">${escapeHTML(comment.user || 'Anonymous')}</span>
+                                    </div>
+                                    <span class="comment-date">${formatReviewDate(comment.date)}</span>
+                                </div>
+                                <p class="comment-content">${escapeHTML(comment.content)}</p>
+                            </div>
+                        `).join('');
+                        listContainer.scrollTop = listContainer.scrollHeight;
+                    }
+                    const replyCountSpan = card.querySelector('.replies-count');
+                    if (replyCountSpan) replyCountSpan.textContent = result.comments.length;
+
+                    textarea.value = '';
+                } else {
+                    alert(result.message || 'Failed to submit reply.');
+                }
+            } catch (err) {
+                console.error('Error submitting reply:', err);
+                alert('Connection error occurred while submitting reply.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+            }
+        });
+    });
 }
 
 function escapeHTML(str) {
@@ -270,8 +449,8 @@ function createMovieCard(item) {
                 <img src="${item.poster}" alt="${item.title}" class="movie-poster" loading="lazy">
                 <span class="movie-type ${item.type}">${item.type.toUpperCase()}</span>
                 <div class="movie-actions">
-                    <a href="details.html?id=${item.id}&type=${item.type}" class="view-btn">View</a>
-                    <a href="add-review.html?id=${item.id}&type=${item.type}" class="review-btn">Review</a>
+                    <a href="details.html?id=${item.id}&type=${item.type}" class="view-btn"><i class="fas fa-eye"></i> View Details</a>
+                    <a href="add-review.html?id=${item.id}&type=${item.type}" class="review-btn"><i class="fas fa-edit"></i> Write Review</a>
                 </div>
             </div>
             <div class="movie-info">
@@ -438,4 +617,123 @@ function checkAuthStatus() {
 function logout() {
     localStorage.removeItem('currentUser');
     window.location.href = 'index.html';
+}
+
+function initShareModal(item) {
+    const shareBtn = document.querySelector('.share-btn');
+    const modal = document.getElementById('share-modal');
+    const closeBtn = document.querySelector('.close-share-modal');
+    const copyBtn = document.getElementById('share-copy-btn');
+    const shareUrlInput = document.getElementById('share-url-input');
+
+    if (!shareBtn || !modal) return;
+
+    // Open Share action
+    shareBtn.addEventListener('click', async () => {
+        // Try native share if available
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: item.title,
+                    text: `Check out ${item.title} on MovAni!`,
+                    url: window.location.href
+                });
+                return;
+            } catch (err) {
+                // If cancelled/aborted, do nothing
+                if (err.name === 'AbortError') {
+                    return;
+                }
+                console.warn('Native share failed, falling back to modal:', err);
+            }
+        }
+
+        // Custom share modal fallback
+        openModal();
+    });
+
+    function openModal() {
+        const currentUrl = window.location.href;
+        if (shareUrlInput) {
+            shareUrlInput.value = currentUrl;
+        }
+
+        // Generate dynamic social share URLs
+        const shareTitle = encodeURIComponent(`Check out ${item.title} on MovAni!`);
+        const shareUrl = encodeURIComponent(currentUrl);
+
+        const twitterBtn = document.getElementById('share-twitter');
+        if (twitterBtn) {
+            twitterBtn.href = `https://twitter.com/intent/tweet?text=${shareTitle}&url=${shareUrl}`;
+        }
+
+        const facebookBtn = document.getElementById('share-facebook');
+        if (facebookBtn) {
+            facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+        }
+
+        const whatsappBtn = document.getElementById('share-whatsapp');
+        if (whatsappBtn) {
+            whatsappBtn.href = `https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`;
+        }
+
+        const emailBtn = document.getElementById('share-email');
+        if (emailBtn) {
+            emailBtn.href = `mailto:?subject=${encodeURIComponent(item.title)}&body=${shareTitle}%20${shareUrl}`;
+        }
+
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    // Close on click of the close button
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+
+    // Close on click outside modal content
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Copy Link functionality
+    if (copyBtn) {
+        let copyTimeout;
+        const originalHTML = copyBtn.innerHTML;
+
+        copyBtn.addEventListener('click', async () => {
+            const textToCopy = shareUrlInput ? shareUrlInput.value : window.location.href;
+            
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                showCopiedFeedback();
+            } catch (err) {
+                console.error('Failed to copy using clipboard API, using fallback:', err);
+                if (shareUrlInput) {
+                    shareUrlInput.select();
+                    try {
+                        document.execCommand('copy');
+                        showCopiedFeedback();
+                    } catch (fallbackErr) {
+                        console.error('Fallback copy failed:', fallbackErr);
+                    }
+                }
+            }
+        });
+
+        function showCopiedFeedback() {
+            clearTimeout(copyTimeout);
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
+            copyBtn.style.background = 'linear-gradient(45deg, #25D366, #128C7E)';
+            copyTimeout = setTimeout(() => {
+                copyBtn.innerHTML = originalHTML;
+                copyBtn.style.background = '';
+            }, 2000);
+        }
+    }
 }

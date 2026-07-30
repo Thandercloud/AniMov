@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const path = require('path');
 const mainRouter = require('./routes');
 const errorHandler = require('./middleware/errorHandler');
+const maintenance = require('./middleware/maintenance');
 
 const app = express();
 
@@ -12,6 +13,9 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Maintenance Mode Interceptor
+app.use(maintenance);
 
 // API & Aggregation routes
 app.use('/', mainRouter);

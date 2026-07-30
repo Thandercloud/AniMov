@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllReviews, getReviewById, createReview, updateReview, deleteReview } = require('../controllers/reviewController');
+const { getAllReviews, getReviewById, createReview, updateReview, deleteReview, likeReview, addComment } = require('../controllers/reviewController');
 const { validateFields } = require('../middleware/validate');
 
 router.route('/')
@@ -11,5 +11,11 @@ router.route('/:id')
     .get(getReviewById)
     .put(updateReview)
     .delete(deleteReview);
+
+router.route('/:id/like')
+    .post(likeReview);
+
+router.route('/:id/comments')
+    .post(addComment);
 
 module.exports = router;

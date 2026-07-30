@@ -43,7 +43,7 @@
                 
                 <p class="details-synopsis" id="detail-synopsis"></p>
                 
-                <div class="details-actions">
+                <div class="action-buttons">
                     <button class="action-btn watchlist-btn" id="add-watchlist-btn">
                         <i class="fas fa-bookmark"></i> Add to Watchlist
                     </button>
@@ -67,6 +67,39 @@
                 <span class="close-modal">&times;</span>
                 <div class="video-container">
                     <iframe id="trailer-video" width="100%" height="500" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Modal -->
+        <div id="share-modal" class="modal">
+            <div class="modal-content share-modal-content">
+                <span class="close-share-modal">&times;</span>
+                <h3>Share Movie & Anime</h3>
+                <p>Spread the word with your friends and community</p>
+                <div class="share-social-grid">
+                    <a href="#" class="share-social-btn twitter" id="share-twitter" target="_blank" rel="noopener">
+                        <i class="fab fa-twitter"></i>
+                        <span>X / Twitter</span>
+                    </a>
+                    <a href="#" class="share-social-btn facebook" id="share-facebook" target="_blank" rel="noopener">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="#" class="share-social-btn whatsapp" id="share-whatsapp" target="_blank" rel="noopener">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="#" class="share-social-btn email" id="share-email" target="_blank" rel="noopener">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                </div>
+                <div class="share-url-container">
+                    <input type="text" id="share-url-input" readonly>
+                    <button id="share-copy-btn">
+                        <i class="fas fa-copy"></i> <span>Copy Link</span>
+                    </button>
                 </div>
             </div>
         </div>

@@ -582,10 +582,83 @@ body {
     transform: translateY(-10px);
 }
 
+.movie-poster-container {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+}
+
 .movie-poster {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.movie-card:hover .movie-poster {
+    transform: scale(1.05);
+}
+
+.movie-actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.movie-card:hover .movie-actions {
+    opacity: 1;
+}
+
+.movie-actions .view-btn,
+.movie-actions .review-btn {
+    width: 75%;
+    padding: 0.75rem 1.25rem;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.movie-actions .view-btn {
+    background: linear-gradient(45deg, var(--accent), var(--primary));
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(0, 198, 255, 0.3);
+}
+
+.movie-actions .view-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 198, 255, 0.5);
+}
+
+.movie-actions .review-btn {
+    background: transparent;
+    color: white !important;
+    border: 2px solid white;
+}
+
+.movie-actions .review-btn:hover {
+    background: white;
+    color: var(--dark) !important;
+    transform: translateY(-2px);
 }
 
 .movie-info {
@@ -1141,3 +1214,165 @@ body {
 }
 
 /* Removed duplicate nav-item-btn styles to prevent style overrides. All logic handled on main definition. */
+
+/* Review Action Like Button Global Styles */
+.review-action-btn {
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-secondary) !important;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 0.8rem !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.review-action-btn:hover {
+    color: var(--accent) !important;
+    background: rgba(0, 198, 255, 0.08) !important;
+}
+
+.review-action-btn.active {
+    color: var(--accent) !important;
+    background: rgba(0, 198, 255, 0.12) !important;
+    font-weight: bold;
+}
+
+.review-action-btn.active i {
+    transform: scale(1.15);
+    color: var(--accent) !important;
+}
+
+/* Review Replies / Comments Styles */
+.reply-section {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.comment-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+
+.comment-user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comment-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+}
+
+.comment-username {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.comment-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.comment-content {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    white-space: pre-line;
+}
+
+.reply-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.reply-textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 0.9rem;
+    resize: vertical;
+    min-height: 60px;
+    transition: all 0.3s ease;
+}
+
+.reply-textarea:focus {
+    border-color: var(--accent);
+    background: rgba(0, 0, 0, 0.3);
+    outline: none;
+}
+
+.reply-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+}
+
+.reply-submit-btn,
+.reply-cancel-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reply-submit-btn {
+    background: linear-gradient(45deg, var(--accent), var(--primary));
+    color: white;
+    border: none;
+}
+
+.reply-submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 198, 255, 0.3);
+}
+
+.reply-cancel-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.reply-cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+}

@@ -127,9 +127,29 @@ const login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
         const emailRegex = new RegExp(`^${email}$`, 'i');
-        const user = await User.findOne({ email: emailRegex, password });
+        const user = await User.findOne({ email: emailRegex });
         
         if (!user) {
+            return res.status(400).json({ success: false, message: 'Invalid credentials' });
+        }
+
+        const isBcrypt = /^\$2[ayb]\$\d+\$[./A-Za-z0-9]{53}$/.test(user.password);
+        let isMatch = false;
+
+        if (isBcrypt) {
+            isMatch = await user.comparePassword(password);
+        } else {
+            // Document has plaintext password: do fast check
+            isMatch = (user.password === password);
+            if (isMatch) {
+                // Lazy migration to bcrypt hash
+                user.password = password;
+                user.markModified('password');
+                await user.save();
+            }
+        }
+
+        if (!isMatch) {
             return res.status(400).json({ success: false, message: 'Invalid credentials' });
         }
 

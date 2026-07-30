@@ -13,6 +13,7 @@ const movieRoutes = require('./movieRoutes');
 const animeRoutes = require('./animeRoutes');
 const reviewRoutes = require('./reviewRoutes');
 const watchlistRoutes = require('./watchlistRoutes');
+const adminRoutes = require('./adminRoutes');
 
 // API Routes
 router.use('/api/auth', authRoutes);
@@ -21,6 +22,7 @@ router.use('/api/movies', movieRoutes);
 router.use('/api/anime', animeRoutes);
 router.use('/api/reviews', reviewRoutes);
 router.use('/api/watchlist', watchlistRoutes);
+router.use('/api/admin', adminRoutes);
 
 // GET /api/search
 router.get('/api/search', async (req, res, next) => {

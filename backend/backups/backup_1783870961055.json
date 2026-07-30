@@ -1,0 +1,1079 @@
+{
+  "movies": [
+    {
+      "_id": "6a2ecd5c0188efb35e63e744",
+      "id": 101,
+      "title": "Attack on Titan: Final Season",
+      "type": "anime",
+      "year": 2023,
+      "rating": 9.8,
+      "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "banner": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "episodes": 28,
+      "genres": [
+        "Action",
+        "Drama",
+        "Fantasy"
+      ],
+      "synopsis": "The epic conclusion to the war between Paradis and Marley as Eren's plan reaches its climax.",
+      "status": "Completed",
+      "trailer": "https://www.youtube.com/embed/M_OauHnAFc8",
+      "studio": "MAPPA",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a2ecd5c0188efb35e63e745",
+      "id": 102,
+      "title": "Demon Slayer: Kimetsu no Yaiba",
+      "type": "anime",
+      "year": 2023,
+      "rating": 9.3,
+      "poster": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "episodes": 55,
+      "genres": [
+        "Action",
+        "Supernatural",
+        "Historical"
+      ],
+      "synopsis": "Tanjiro Kamado's journey to turn his sister back into a human and defeat the demon Muzan Kibutsuji.",
+      "status": "Ongoing",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a2ecd5c0188efb35e63e742",
+      "id": 1,
+      "title": "Dune: Part Two",
+      "type": "movie",
+      "year": 2024,
+      "rating": 9.2,
+      "poster": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "banner": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "runtime": "166 min",
+      "genres": [
+        "Sci-Fi",
+        "Adventure",
+        "Drama"
+      ],
+      "synopsis": "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
+      "status": "Released",
+      "trailer": "https://www.youtube.com/embed/Way9Dexny3w",
+      "director": "Denis Villeneuve",
+      "cast": [
+        "Timothée Chalamet",
+        "Zendaya",
+        "Rebecca Ferguson"
+      ],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a2ecd5c0188efb35e63e743",
+      "id": 2,
+      "title": "Spider-Man: Across the Spider-Verse",
+      "type": "movie",
+      "year": 2023,
+      "rating": 9,
+      "poster": "https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "runtime": "140 min",
+      "genres": [
+        "Animation",
+        "Action",
+        "Adventure"
+      ],
+      "synopsis": "Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People.",
+      "status": "Released",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a2ed089c314f807bb995284",
+      "id": 1781452937221,
+      "title": "one piece",
+      "type": "anime",
+      "year": 1999,
+      "rating": 10,
+      "poster": "",
+      "runtime": "24 min 1158",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Drama",
+        "Superhero"
+      ],
+      "synopsis": "good anime",
+      "status": "Ongoing",
+      "trailer": "",
+      "cast": [],
+      "userId": 999999,
+      "__v": 0
+    },
+    {
+      "_id": "6a2ed2b84b0ebcc833a58457",
+      "id": 1781453496740,
+      "title": "Test Sci-Fi Movie",
+      "type": "movie",
+      "year": 2026,
+      "rating": 8.5,
+      "genres": [
+        "Sci-Fi",
+        "Action"
+      ],
+      "synopsis": "A test sci-fi movie created by automated API tests.",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a2ed7966e200e96190c128e",
+      "id": 1781454742184,
+      "title": "one piece",
+      "type": "anime",
+      "year": 2024,
+      "rating": 7.5,
+      "poster": "",
+      "runtime": "",
+      "genres": [
+        "Action",
+        "Adventure"
+      ],
+      "synopsis": "gd",
+      "status": "Ongoing",
+      "trailer": "",
+      "cast": [],
+      "userId": 999999,
+      "__v": 0
+    },
+    {
+      "_id": "6a32e300c3a4252701c0a0eb",
+      "id": 1781719808825,
+      "title": "Test Sci-Fi Movie",
+      "type": "movie",
+      "year": 2026,
+      "rating": 8.5,
+      "genres": [
+        "Sci-Fi",
+        "Action"
+      ],
+      "synopsis": "A test sci-fi movie created by automated API tests.",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a37ec07dc31741b8777eabc",
+      "id": 1782049799801,
+      "title": "Test Sci-Fi Movie",
+      "type": "movie",
+      "year": 2026,
+      "rating": 8.5,
+      "genres": [
+        "Sci-Fi",
+        "Action"
+      ],
+      "synopsis": "A test sci-fi movie created by automated API tests.",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a38ded977a03d31d8210325",
+      "id": 1782111961248,
+      "title": "Fast & Furious",
+      "type": "movie",
+      "year": 2001,
+      "rating": 10,
+      "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD5Lt5C4qP_427G56XD4W9hPTOe1oFdQwcE21BD09l2w&s=10",
+      "runtime": "180 min",
+      "genres": [
+        "Adventure",
+        "Action",
+        "Drama",
+        "Fantasy",
+        "Mystery",
+        "Romance",
+        "Sci-Fi",
+        "Family"
+      ],
+      "synopsis": "# Synopsis of the *Fast & Furious* Movie Series\n\n![Image](https://images.openai.com/static-rsc-4/TawzRbfeNrH6uX3MX4e9Ac9OEWU7Atq2voacFZnGuud-8GZmGyQ27BEavKNESyc9N0vEEC1bh7SLPdmagLcEagfOom7mEQGnWY5ltLEAkftJ_vDtkpRSBlOWZmrV1gdMsBnU3MKGiE00Z17Xpq4nOgfii1z84KckpzvtlLaDbxvZZ6g0CTilSV8EEJLrF-ot?purpose=fullsize)\n\n![Image](https://images.openai.com/static-rsc-4/eHCtbSLI9r0JL1hfmMBYx32dHg7odIIE5U0eC18-SS32rD9iYuXpGI8s5uilYn54IyRqWKTVjhFPU2OACyDxEyUvos0Su3zugtkI1sElW7XagO1m9javevQTyFfiCF0HFSLymXKgXJ5Z0fe1MdG4RcN5qIRKE9Kk8fibS-yfcMZBnblRxaWviY8VxDSEijIe?purpose=fullsize)\n\n![Image](https://images.openai.com/static-rsc-4/7HjKFXcoZGuJVyHmuHOUPeSIRYxz_A4s3LAN4pwWXd5ZXjAcEw0DrRQxJxCQP5YDR0bUnra7sg5m2QpTcD6gZknoC-n0NbVrLnc529zPz4MdE6qPsQ2ePRclkjfmbm-KBaVH8Gw6Eu5RTaVJg_EaracobGsn92rQoOfs8tgtRgTZhlfzpOorltxUuIHxiZyE?purpose=fullsize)\n\n![Image](https://images.openai.com/static-rsc-4/2JdYWq0QxVMh6PcV0J2NUEJt7IKS7RCaXp2pqMyLGUZjXW-ah7mmJoQ3ARZjsZnXufaB8YueN2dtxWBNYdk9povBseSgiZ660uGRN79OuLMPboAlTsBOtlC3_V26AKACqOLkin6xubFI6rH4AsY2_KDYj23UyOZFQVZMlUxYcTzXdp0nfFAWv_0yWlzPlLcF?purpose=fullsize)\n\n![Image](https://images.openai.com/static-rsc-4/LC4OyXdoss2_dAC6Vgjyy_DHFLwiy_-WDTjFYel2xB1DO5QNmWQ_1j85lGoJ3jR9r-G63cdpo71JZaHN1tRM_Zm3NVWRqGUUbALOZhI2OBh4sSptD2GzgndI6ksVoCyMBQr2qJWExrK3H0eS5cF89b7hTTDq_0z6FyooPtKp1eUtxorjTeEnQHy4dfGzl8UA?purpose=fullsize)\n\n![Image](https://images.openai.com/static-rsc-4/QA4Y5uAhhKhGR7vbnJoIPSPB3bqAP93zcdjQT945bCg2LgontdU_ztREAOXkfVrIFuR9Gd9IsXBCsIyW0GjFibp2r42Z6i5e4thNUhxCqGAH4tqTyjgwpzWXZp-kjWW9q4hslsl4qV7wB7vax8cjIOBFmLNv5CweAJvMdIqBypMleAZxlpzpMLW6soyh649g?purpose=fullsize)\n\n## Introduction\n\nThe *Fast & Furious* series is one of the most successful action film franchises in Hollywood. Created around the culture of street racing, the series gradually evolved into a global action-adventure saga featuring high-speed chases, heists, espionage missions, and themes of family, loyalty, and friendship. The franchise primarily follows Dominic Toretto and his crew as they face increasingly dangerous challenges across the world.\n\n---\n\n## 1. The Fast and the Furious (2001)\n\nThe story begins when undercover police officer Brian O'Conner investigates a group of street racers suspected of hijacking trucks in Los Angeles. During the investigation, Brian becomes close friends with Dominic Toretto and falls in love with Dom's sister, Mia. Torn between duty and friendship, Brian ultimately allows Dom to escape, setting the foundation for the franchise.\n\n---\n\n## 2. 2 Fast 2 Furious (2003)\n\nBrian O'Conner teams up with his childhood friend Roman Pearce to help law enforcement bring down a dangerous drug lord in Miami. The film focuses on undercover operations, fast cars, and rebuilding trust between friends.\n\n---\n\n## 3. The Fast and the Furious: Tokyo Drift (2006)\n\nA teenager named Sean Boswell moves to Tokyo and becomes involved in the world of drift racing. He learns the art of drifting under the guidance of Han Lue. Although largely independent from the previous films, it later becomes important to the overall storyline.\n\n---\n\n## 4. Fast & Furious (2009)\n\nDominic Toretto and Brian O'Conner reunite after the death of Dom's girlfriend Letty. Despite being on opposite sides of the law, they work together to expose a drug trafficking organization and seek justice.\n\n---\n\n## 5. Fast Five (2011)\n\nThe franchise shifts from street racing to large-scale heist action. Dom, Brian, and their team attempt to steal millions of dollars from a corrupt businessman in Rio de Janeiro while being pursued by federal agent Luke Hobbs. The film is widely considered a turning point for the series.\n\n---\n\n## 6. Fast & Furious 6 (2013)\n\nThe crew is recruited by Luke Hobbs to stop a skilled mercenary group led by Owen Shaw. They discover that Letty, previously believed dead, is actually alive but suffering from memory loss.\n\n---\n\n## 7. Furious 7 (2015)\n\nDom's team faces revenge from Deckard Shaw, the brother of Owen Shaw. The film is especially memorable because it serves as a tribute to actor Paul Walker, who passed away during production. The emotional ending celebrates friendship and family.\n\n---\n\n## 8. The Fate of the Furious (2017)\n\nA cyberterrorist named Cipher manipulates Dom into working against his own team. The crew must uncover the truth behind Dom's actions and stop a global threat involving advanced technology and nuclear weapons.\n\n---\n\n## 9. F9 (2021)\n\nDom confronts his estranged brother, Jakob Toretto, who is involved in a plot that threatens world security. The movie explores Dom's family history and features increasingly ambitious action sequences.\n\n---\n\n## 10. Fast X (2023)\n\nThe team faces Dante Reyes, the son of a former enemy from *Fast Five*. Seeking revenge against Dom and his family, Dante launches a global campaign of chaos and destruction. The film ends on a major cliffhanger, setting up future installments.\n\n---\n\n## Main Themes\n\n* **Family:** The central theme throughout the franchise.\n* **Friendship and Loyalty:** Characters repeatedly risk their lives for one another.\n* **Redemption:** Many former enemies become allies.\n* **Speed and Cars:** Street racing remains an important element despite the shift toward action and espionage.\n* **Teamwork:** Success depends on trust and cooperation among the crew.\n\n---\n\n## Conclusion\n\nThe *Fast & Furious* franchise evolved from a simple street-racing story into a worldwide action saga. Through thrilling car chases, daring missions, and strong themes of family and loyalty, the series has become one of the highest-grossing film franchises in cinematic history. Characters such as Dominic Toretto, Brian O'Conner, Letty Ortiz, Roman Pearce, and Luke Hobbs have become iconic figures in modern action cinema.\n",
+      "status": "Released",
+      "trailer": "https://www.youtube.com/watch?v=h7xXAU2Rcjw",
+      "cast": [],
+      "userId": 999999,
+      "__v": 0
+    },
+    {
+      "_id": "6a4169d151b356d60e2f214a",
+      "id": 1782671825376,
+      "title": "Test Sci-Fi Movie",
+      "type": "movie",
+      "year": 2026,
+      "rating": 8.5,
+      "genres": [
+        "Sci-Fi",
+        "Action"
+      ],
+      "synopsis": "A test sci-fi movie created by automated API tests.",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a416e55ddcd3599edcdbf32",
+      "id": 1782672981653,
+      "title": "Test Sci-Fi Movie",
+      "type": "movie",
+      "year": 2026,
+      "rating": 8.5,
+      "genres": [
+        "Sci-Fi",
+        "Action"
+      ],
+      "synopsis": "A test sci-fi movie created by automated API tests.",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a416e81ddcd3599edcdbf36",
+      "id": 1782673025430,
+      "title": "Test Sci-Fi Movie",
+      "type": "movie",
+      "year": 2026,
+      "rating": 8.5,
+      "genres": [
+        "Sci-Fi",
+        "Action"
+      ],
+      "synopsis": "A test sci-fi movie created by automated API tests.",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a41743420d84f9d422b195d",
+      "id": 1782674484894,
+      "title": "Test Sci-Fi Movie",
+      "type": "movie",
+      "year": 2026,
+      "rating": 8.5,
+      "genres": [
+        "Sci-Fi",
+        "Action"
+      ],
+      "synopsis": "A test sci-fi movie created by automated API tests.",
+      "cast": [],
+      "userId": 0,
+      "__v": 0
+    }
+  ],
+  "anime": [
+    {
+      "_id": "6a32e2d9c3a4252701c0a0e3",
+      "id": 101,
+      "title": "Attack on Titan: Final Season",
+      "type": "anime",
+      "year": 2023,
+      "rating": 9.8,
+      "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "banner": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "episodes": 28,
+      "genres": [
+        "Action",
+        "Drama",
+        "Fantasy"
+      ],
+      "synopsis": "The epic conclusion to the war between Paradis and Marley as Eren's plan reaches its climax.",
+      "status": "Completed",
+      "trailer": "https://www.youtube.com/embed/M_OauHnAFc8",
+      "studio": "MAPPA",
+      "userId": 0,
+      "__v": 0
+    },
+    {
+      "_id": "6a32e2d9c3a4252701c0a0e4",
+      "id": 102,
+      "title": "Demon Slayer: Kimetsu no Yaiba",
+      "type": "anime",
+      "year": 2023,
+      "rating": 9.3,
+      "poster": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "episodes": 55,
+      "genres": [
+        "Action",
+        "Supernatural",
+        "Historical"
+      ],
+      "synopsis": "Tanjiro Kamado's journey to turn his sister back into a human and defeat the demon Muzan Kibutsuji.",
+      "status": "Ongoing",
+      "userId": 0,
+      "__v": 0
+    }
+  ],
+  "reviews": [
+    {
+      "metrics": {
+        "overall": 0,
+        "story": 0,
+        "characters": 0,
+        "visuals": 0,
+        "sound": 0
+      },
+      "category": "movie",
+      "_id": "6a2ecd72c314f807bb995283",
+      "id": 1002,
+      "userId": 0,
+      "movieId": 101,
+      "user": "AnimeFan42",
+      "avatar": "AF",
+      "rating": 10,
+      "content": "Isayama's masterful storytelling combined with MAPPA's animation created perfection.",
+      "spoiler": false,
+      "privacy": "public",
+      "date": "2023-11-10",
+      "likes": 892,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 9,
+        "story": 9,
+        "characters": 9,
+        "visuals": 9,
+        "sound": 9
+      },
+      "category": "movie",
+      "_id": "6a32e301c3a4252701c0a0ec",
+      "id": 1781719809310,
+      "userId": 1781719808331,
+      "movieId": 1781719808825,
+      "user": "testuser_1781719807660",
+      "avatar": "TE",
+      "rating": 9,
+      "title": "Great Test Movie",
+      "content": "Highly recommended. Automated review test is successful.",
+      "spoiler": false,
+      "privacy": "public",
+      "date": "2026-06-17",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 9,
+        "story": 9,
+        "characters": 9,
+        "visuals": 9,
+        "sound": 9
+      },
+      "category": "movie",
+      "_id": "6a4169d151b356d60e2f214b",
+      "id": 1782671825491,
+      "userId": 1782671825252,
+      "movieId": 1782671825376,
+      "user": "testuser_1782671825189",
+      "avatar": "TE",
+      "rating": 9,
+      "title": "Great Test Movie",
+      "content": "Highly recommended. Automated review test is successful.",
+      "spoiler": false,
+      "privacy": "public",
+      "date": "2026-06-28",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 5,
+        "story": 5,
+        "characters": 5,
+        "visuals": 5,
+        "sound": 5
+      },
+      "category": "movie",
+      "_id": "6a416a047d7c737856e4bee7",
+      "id": 1782671876334,
+      "userId": 0,
+      "movieId": 1,
+      "user": "&lt;script&gt;alert(&quot;XSS_NAME&quot;)&lt;&#x2F;script&gt;Test Guest",
+      "avatar": "&L",
+      "rating": 5,
+      "title": "&lt;b&gt;Perfect Movie!&lt;&#x2F;b&gt;",
+      "content": "&lt;img src=x onerror=alert(&quot;XSS_CONTENT&quot;)&gt; Loved the visuals.",
+      "spoiler": false,
+      "privacy": "public",
+      "email": "guest_test@example.com",
+      "date": "2026-06-28",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 5,
+        "story": 5,
+        "characters": 5,
+        "visuals": 5,
+        "sound": 5
+      },
+      "category": "movie",
+      "_id": "6a416a107d7c737856e4bee8",
+      "id": 1782671888261,
+      "userId": 0,
+      "movieId": 1,
+      "user": "&lt;script&gt;alert(&quot;XSS_NAME&quot;)&lt;&#x2F;script&gt;Test Guest",
+      "avatar": "&L",
+      "rating": 5,
+      "title": "&lt;b&gt;Perfect Movie!&lt;&#x2F;b&gt;",
+      "content": "&lt;img src=x onerror=alert(&quot;XSS_CONTENT&quot;)&gt; Loved the visuals.",
+      "spoiler": false,
+      "privacy": "public",
+      "email": "guest_test@example.com",
+      "date": "2026-06-28",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 4,
+        "story": 4,
+        "characters": 4,
+        "visuals": 4,
+        "sound": 4
+      },
+      "category": "movie",
+      "_id": "6a416b9b7d7c737856e4bee9",
+      "id": 1782672283098,
+      "userId": 0,
+      "movieId": 1,
+      "user": "m",
+      "avatar": "M",
+      "rating": 4,
+      "title": "akjdgkadhgka",
+      "content": "ajdg;hgkjahdsgkjas;gkjans;ga;skdghasdhgapsuhgpnaebvnaeiunvaenlaka;el&#x2F;gjn&#x2F;snigti;nghablvmgna.m",
+      "spoiler": false,
+      "privacy": "public",
+      "email": "m@gmail.com",
+      "date": "2026-06-28",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 5,
+        "story": 5,
+        "characters": 5,
+        "visuals": 5,
+        "sound": 5
+      },
+      "category": "movie",
+      "_id": "6a416d9a97037fcdf4d71fa6",
+      "id": 1782672794790,
+      "userId": 999999,
+      "movieId": 2,
+      "user": "Demo User",
+      "avatar": "DU",
+      "rating": 5,
+      "title": "An Absolute Masterpiece",
+      "content": "This movie has fantastic pacing, visuals, and emotional weight.",
+      "spoiler": false,
+      "privacy": "public",
+      "email": "demo@movani.com",
+      "date": "2026-06-28T18:53:14.790Z",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 5,
+        "story": 5,
+        "characters": 5,
+        "visuals": 5,
+        "sound": 5
+      },
+      "category": "movie",
+      "_id": "6a416de897037fcdf4d71fa7",
+      "id": 1782672872264,
+      "userId": 999999,
+      "movieId": 1782111961248,
+      "user": "Demo User",
+      "avatar": "DU",
+      "rating": 5,
+      "title": "akjdgkadhgka",
+      "content": "adlgafigaiguasiughosaiugdhasiudghasiudglaslkasg asdg asdughaslidghasdg alsd gasudghlaiuhg laiuhsga gasga ga ga gaslgag as",
+      "spoiler": false,
+      "privacy": "public",
+      "email": "demo@movani.com",
+      "date": "2026-06-28T18:54:32.264Z",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 9,
+        "story": 9,
+        "characters": 9,
+        "visuals": 9,
+        "sound": 9
+      },
+      "category": "movie",
+      "_id": "6a416e55ddcd3599edcdbf33",
+      "id": 1782672981809,
+      "userId": 1782672981519,
+      "movieId": 1782672981653,
+      "user": "testuser_1782672981413",
+      "avatar": "TE",
+      "rating": 9,
+      "title": "Great Test Movie",
+      "content": "Highly recommended. Automated review test is successful.",
+      "spoiler": false,
+      "privacy": "public",
+      "email": "test_1782672981413@example.com",
+      "date": "2026-06-28T18:56:21.809Z",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 9,
+        "story": 9,
+        "characters": 9,
+        "visuals": 9,
+        "sound": 9
+      },
+      "category": "movie",
+      "_id": "6a416e81ddcd3599edcdbf37",
+      "id": 1782673025566,
+      "userId": 1782673025312,
+      "movieId": 1782673025430,
+      "user": "testuser_1782673025253",
+      "avatar": "TE",
+      "rating": 9,
+      "title": "Great Test Movie",
+      "content": "Highly recommended. Automated review test is successful.",
+      "spoiler": false,
+      "privacy": "public",
+      "email": "test_1782673025253@example.com",
+      "date": "2026-06-28T18:57:05.566Z",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 9,
+        "story": 9,
+        "characters": 9,
+        "visuals": 9,
+        "sound": 9
+      },
+      "_id": "6a41743520d84f9d422b195e",
+      "id": 1782674485032,
+      "userId": 1782674484766,
+      "movieId": 1782674484894,
+      "user": "testuser_1782674484688",
+      "avatar": "TE",
+      "rating": 9,
+      "title": "Great Test Movie",
+      "content": "Highly recommended. Automated review test is successful.",
+      "spoiler": false,
+      "privacy": "public",
+      "category": "movie",
+      "email": "test_1782674484688@example.com",
+      "date": "2026-06-28T19:21:25.032Z",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 2,
+        "story": 2,
+        "characters": 2,
+        "visuals": 2,
+        "sound": 2
+      },
+      "_id": "6a41749320d84f9d422b1960",
+      "id": 1782674579694,
+      "userId": 999999,
+      "movieId": 1,
+      "user": "Demo User",
+      "avatar": "DU",
+      "rating": 2,
+      "title": "akjdgkadhgka",
+      "content": "it is what it is",
+      "spoiler": false,
+      "privacy": "public",
+      "category": "movie",
+      "email": "demo@movani.com",
+      "date": "2026-06-28T19:22:59.694Z",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 10,
+        "story": 10,
+        "characters": 10,
+        "visuals": 10,
+        "sound": 10
+      },
+      "_id": "6a421eb11fa2d14fda0e41cf",
+      "id": 1782718129127,
+      "userId": 999999,
+      "movieId": 101,
+      "user": "Demo User",
+      "avatar": "DU",
+      "rating": 10,
+      "title": "kesuakta",
+      "content": "abcdefghijklmnopqrstuvwxyz",
+      "spoiler": false,
+      "privacy": "public",
+      "category": "movie",
+      "email": "demo@movani.com",
+      "date": "2026-06-29T07:28:49.127Z",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    },
+    {
+      "metrics": {
+        "overall": 10,
+        "story": 10,
+        "characters": 10,
+        "visuals": 10,
+        "sound": 10
+      },
+      "_id": "6a4a925be59cc9194200f034",
+      "id": 1783272027342,
+      "userId": 1782055860409,
+      "movieId": 1782111961248,
+      "user": "ke",
+      "avatar": "KE",
+      "rating": 10,
+      "title": "something",
+      "content": "just wow just wow",
+      "spoiler": false,
+      "privacy": "public",
+      "category": "movie",
+      "email": "ke@gmail.com",
+      "date": "2026-07-05T17:20:27.342Z",
+      "likes": 0,
+      "comments": [],
+      "__v": 0
+    }
+  ],
+  "users": [
+    {
+      "preferences": {
+        "content": {
+          "movies": true,
+          "anime": true,
+          "tvshows": false
+        },
+        "genres": []
+      },
+      "stats": {
+        "reviews": 0,
+        "watchlist": 0,
+        "following": 0,
+        "followers": 0
+      },
+      "role": "user",
+      "banned": false,
+      "twoFactorEnabled": false,
+      "_id": "6a37fac3ffd4e18e81e9ce3a",
+      "id": 1782053571423,
+      "username": "dk",
+      "email": "dk@gmail.com",
+      "password": "123456789",
+      "displayName": "dk",
+      "avatar": "DK",
+      "joined": "2026-06-21T14:52:51.423Z",
+      "__v": 0
+    },
+    {
+      "preferences": {
+        "content": {
+          "movies": true,
+          "anime": true,
+          "tvshows": false
+        },
+        "genres": []
+      },
+      "stats": {
+        "reviews": 1,
+        "watchlist": 0,
+        "following": 0,
+        "followers": 0
+      },
+      "role": "user",
+      "banned": false,
+      "twoFactorEnabled": false,
+      "_id": "6a3803b4ffd4e18e81e9ce3b",
+      "id": 1782055860409,
+      "username": "ke",
+      "email": "ke@gmail.com",
+      "password": "2211",
+      "displayName": "ke",
+      "avatar": "KE",
+      "joined": "2026-06-21T15:31:00.409Z",
+      "__v": 0
+    },
+    {
+      "preferences": {
+        "content": {
+          "movies": true,
+          "anime": true,
+          "tvshows": false
+        },
+        "genres": []
+      },
+      "stats": {
+        "reviews": 1,
+        "watchlist": 0,
+        "following": 0,
+        "followers": 0
+      },
+      "role": "user",
+      "banned": false,
+      "twoFactorEnabled": false,
+      "_id": "6a4169d151b356d60e2f2149",
+      "id": 1782671825252,
+      "username": "testuser_1782671825189",
+      "email": "test_1782671825189@example.com",
+      "password": "password123",
+      "displayName": "testuser_1782671825189",
+      "avatar": "TE",
+      "joined": "2026-06-28T18:37:05.252Z",
+      "__v": 0
+    },
+    {
+      "preferences": {
+        "content": {
+          "movies": true,
+          "anime": true,
+          "tvshows": false
+        },
+        "genres": []
+      },
+      "stats": {
+        "reviews": 1,
+        "watchlist": 0,
+        "following": 0,
+        "followers": 0
+      },
+      "role": "user",
+      "banned": false,
+      "twoFactorEnabled": false,
+      "_id": "6a416e55ddcd3599edcdbf31",
+      "id": 1782672981519,
+      "username": "testuser_1782672981413",
+      "email": "test_1782672981413@example.com",
+      "password": "password123",
+      "displayName": "testuser_1782672981413",
+      "avatar": "TE",
+      "joined": "2026-06-28T18:56:21.519Z",
+      "__v": 0
+    },
+    {
+      "preferences": {
+        "content": {
+          "movies": true,
+          "anime": true,
+          "tvshows": false
+        },
+        "genres": []
+      },
+      "stats": {
+        "reviews": 1,
+        "watchlist": 0,
+        "following": 0,
+        "followers": 0
+      },
+      "role": "user",
+      "banned": false,
+      "twoFactorEnabled": false,
+      "_id": "6a416e81ddcd3599edcdbf35",
+      "id": 1782673025312,
+      "username": "testuser_1782673025253",
+      "email": "test_1782673025253@example.com",
+      "password": "password123",
+      "displayName": "testuser_1782673025253",
+      "avatar": "TE",
+      "joined": "2026-06-28T18:57:05.312Z",
+      "__v": 0
+    },
+    {
+      "preferences": {
+        "content": {
+          "movies": true,
+          "anime": true,
+          "tvshows": false
+        },
+        "genres": []
+      },
+      "stats": {
+        "reviews": 1,
+        "watchlist": 0,
+        "following": 0,
+        "followers": 0
+      },
+      "role": "user",
+      "banned": false,
+      "twoFactorEnabled": false,
+      "_id": "6a41743420d84f9d422b195c",
+      "id": 1782674484766,
+      "username": "testuser_1782674484688",
+      "email": "test_1782674484688@example.com",
+      "password": "password123",
+      "displayName": "testuser_1782674484688",
+      "avatar": "TE",
+      "joined": "2026-06-28T19:21:24.766Z",
+      "__v": 0
+    },
+    {
+      "preferences": {
+        "content": {
+          "movies": true,
+          "anime": true,
+          "tvshows": false
+        },
+        "genres": []
+      },
+      "stats": {
+        "reviews": 0,
+        "watchlist": 0,
+        "following": 0,
+        "followers": 0
+      },
+      "_id": "6a53aeb197b5ff0289a19184",
+      "id": 111111,
+      "username": "admin",
+      "email": "admin@movani.com",
+      "password": "admin123",
+      "displayName": "Site Admin",
+      "avatar": "AD",
+      "joined": "2026-07-12T15:11:45.462Z",
+      "role": "admin",
+      "banned": false,
+      "twoFactorEnabled": false,
+      "__v": 0
+    }
+  ],
+  "watchlist": [
+    {
+      "_id": "6a2ecd69b0d9696a3dec4a91",
+      "id": 1002,
+      "userId": 999999,
+      "itemId": 101,
+      "itemType": "anime",
+      "added": "2024-01-20T00:00:00.000Z",
+      "__v": 0,
+      "status": "dropped"
+    },
+    {
+      "_id": "6a2ecd69b0d9696a3dec4a92",
+      "id": 1003,
+      "userId": 999999,
+      "itemId": 2,
+      "itemType": "movie",
+      "added": "2024-02-10T00:00:00.000Z",
+      "__v": 0,
+      "status": "completed"
+    },
+    {
+      "_id": "6a2ecd69b0d9696a3dec4a90",
+      "id": 1001,
+      "userId": 999999,
+      "itemId": 1,
+      "itemType": "movie",
+      "added": "2024-01-15T00:00:00.000Z",
+      "__v": 0,
+      "status": "unwatched"
+    },
+    {
+      "_id": "6a2ecd69b0d9696a3dec4a93",
+      "id": 1004,
+      "userId": 999999,
+      "itemId": 102,
+      "itemType": "anime",
+      "added": "2024-02-15T00:00:00.000Z",
+      "__v": 0,
+      "status": "watching"
+    }
+  ],
+  "reports": [
+    {
+      "_id": "6a53aeb297b5ff0289a19190",
+      "id": 1,
+      "reporterId": 999999,
+      "reporterName": "demo_user",
+      "contentType": "review",
+      "contentId": 1001,
+      "reason": "Spoiler not marked",
+      "details": "The review reveals major ending plot points of Dune Part Two without ticking the spoiler box.",
+      "status": "pending",
+      "date": "2026-07-12T15:11:46.996Z",
+      "__v": 0
+    }
+  ],
+  "settings": [
+    {
+      "_id": "6a53aeb297b5ff0289a19185",
+      "key": "maintenanceMode",
+      "value": false,
+      "__v": 0
+    },
+    {
+      "_id": "6a53aeb297b5ff0289a19186",
+      "key": "blockedIPs",
+      "value": [],
+      "__v": 0
+    },
+    {
+      "_id": "6a53aeb297b5ff0289a19187",
+      "key": "siteName",
+      "value": "MovAni",
+      "__v": 0
+    },
+    {
+      "_id": "6a53aeb297b5ff0289a19188",
+      "key": "logoUrl",
+      "value": "",
+      "__v": 0
+    },
+    {
+      "_id": "6a53aeb297b5ff0289a19189",
+      "key": "faviconUrl",
+      "value": "",
+      "__v": 0
+    },
+    {
+      "_id": "6a53aeb297b5ff0289a1918a",
+      "key": "footerText",
+      "value": "© 2025 MovAni. All rights reserved.",
+      "__v": 0
+    },
+    {
+      "_id": "6a53aeb297b5ff0289a1918b",
+      "key": "theme",
+      "value": "dark",
+      "__v": 0
+    },
+    {
+      "_id": "6a53aeb297b5ff0289a1918c",
+      "key": "contactEmail",
+      "value": "support@movani.com",
+      "__v": 0
+    },
+    {
+      "_id": "6a53aeb297b5ff0289a1918d",
+      "key": "genres",
+      "value": [
+        "Action",
+        "Adventure",
+        "Animation",
+        "Comedy",
+        "Drama",
+        "Fantasy",
+        "Horror",
+        "Mystery",
+        "Romance",
+        "Sci-Fi",
+        "Supernatural",
+        "Thriller"
+      ],
+      "__v": 0
+    }
+  ],
+  "notifications": [
+    {
+      "_id": "6a53aeb397b5ff0289a19191",
+      "id": 1,
+      "userId": 0,
+      "title": "Welcome to MovAni!",
+      "message": "Explore the site and share your reviews on the latest movies and anime series.",
+      "type": "info",
+      "read": false,
+      "date": "2026-07-12T15:11:47.098Z",
+      "__v": 0
+    }
+  ],
+  "activityLogs": [
+    {
+      "_id": "6a53aeb497b5ff0289a19192",
+      "id": 1,
+      "userId": 111111,
+      "username": "admin",
+      "action": "System Init",
+      "details": "Seeded initial database structure and configurations",
+      "ip": "127.0.0.1",
+      "date": "2026-07-12T15:11:48.360Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a53b56897b5ff0289a19193",
+      "id": 1783870824840,
+      "userId": 111111,
+      "username": "admin",
+      "action": "Toggle Maintenance",
+      "details": "Set Maintenance Mode to true",
+      "ip": "::1",
+      "date": "2026-07-12T15:40:24.170Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a53b56a97b5ff0289a19194",
+      "id": 1783870826665,
+      "userId": 111111,
+      "username": "admin",
+      "action": "Toggle Maintenance",
+      "details": "Set Maintenance Mode to false",
+      "ip": "::1",
+      "date": "2026-07-12T15:40:26.104Z",
+      "__v": 0
+    }
+  ],
+  "ads": [
+    {
+      "_id": "6a53aeb297b5ff0289a1918e",
+      "id": 1,
+      "title": "Premium Movie Streaming",
+      "imageUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "targetUrl": "https://unsplash.com",
+      "slot": "sidebar",
+      "clicks": 120,
+      "impressions": 5400,
+      "active": true,
+      "__v": 0
+    },
+    {
+      "_id": "6a53aeb297b5ff0289a1918f",
+      "id": 2,
+      "title": "Join our Anime Discord",
+      "imageUrl": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      "targetUrl": "https://discord.com",
+      "slot": "banner",
+      "clicks": 450,
+      "impressions": 12000,
+      "active": true,
+      "__v": 0
+    }
+  ]
+}

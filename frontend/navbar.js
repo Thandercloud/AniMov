@@ -59,6 +59,7 @@ function renderNavbar() {
                     </button>
                     <div class="dropdown-menu">
                         <a href="index.html#profile"><i class="fas fa-user"></i> My Profile</a>
+                        ${currentUser.role === 'admin' ? '<a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a>' : ''}
                         <a href="add-review.html"><i class="fas fa-star"></i> Write Review</a>
                         <a href="watchlist.html"><i class="fas fa-bookmark"></i> My Watchlist</a>
                         <a href="#" onclick="logoutUser(event)"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -85,6 +86,7 @@ function renderNavbar() {
                 <a href="index.html#trending"><i class="fas fa-fire"></i> Trending</a>
                 <hr class="mobile-divider">
                 ${currentUser ? `
+                    ${currentUser.role === 'admin' ? `<a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a>` : ''}
                     <a href="add-movie.html" class="${isPageActive('add-movie.html')}"><i class="fas fa-plus-circle"></i> Add New Title</a>
                     <a href="add-review.html" class="${isPageActive('add-review.html')}"><i class="fas fa-edit"></i> Write Review</a>
                     <a href="watchlist.html" class="${isPageActive('watchlist.html')}"><i class="fas fa-bookmark"></i> My Watchlist</a>

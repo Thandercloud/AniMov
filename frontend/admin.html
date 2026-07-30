@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MovAni</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Local Stylesheet -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Main Shell -->
+    <div class="admin-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <i class="fas fa-film logo-icon"></i>
+                <div class="brand-info">
+                    <span class="brand-name">MovAni</span>
+                    <span class="brand-role">Admin Control</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <!-- Group: Core Operations -->
+                <div class="nav-group">
+                    <span class="group-title">Core Operations</span>
+                    <a href="#" class="nav-link active" data-tab="dashboard">
+                        <i class="fas fa-chart-pie"></i> <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="notifications">
+                        <i class="fas fa-bell"></i> <span>System Alerts</span>
+                    </a>
+                </div>
+
+                <!-- Group: Content Library -->
+                <div class="nav-group">
+                    <span class="group-title">Content Library</span>
+                    <a href="#" class="nav-link" data-tab="movies">
+                        <i class="fas fa-video"></i> <span>Movies</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="anime">
+                        <i class="fas fa-dragon"></i> <span>Anime</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="requests">
+                        <i class="fas fa-inbox"></i> <span>Content Requests</span>
+                        <span class="badge badge-requests" style="display: none;">0</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="genres">
+                        <i class="fas fa-tags"></i> <span>Genres & Categories</span>
+                    </a>
+                </div>
+
+                <!-- Group: User & Moderation -->
+                <div class="nav-group">
+                    <span class="group-title">Moderation</span>
+                    <a href="#" class="nav-link" data-tab="users">
+                        <i class="fas fa-user-friends"></i> <span>User Accounts</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="reviews">
+                        <i class="fas fa-star"></i> <span>Review Moderation</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="comments">
+                        <i class="fas fa-comments"></i> <span>Comments Control</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="reports">
+                        <i class="fas fa-flag"></i> <span>Reports Inbox</span>
+                        <span class="badge badge-reports" style="display: none;">0</span>
+                    </a>
+                </div>
+
+                <!-- Group: Settings & Branding -->
+                <div class="nav-group">
+                    <span class="group-title">Appearance & Custom</span>
+                    <a href="#" class="nav-link" data-tab="homepage">
+                        <i class="fas fa-sliders-h"></i> <span>Homepage Carousel</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="branding">
+                        <i class="fas fa-palette"></i> <span>Branding & Logo</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="ads">
+                        <i class="fas fa-ad"></i> <span>Ad Campaigns</span>
+                    </a>
+                </div>
+
+                <!-- Group: Advanced Operations -->
+                <div class="nav-group">
+                    <span class="group-title">System & Security</span>
+                    <a href="#" class="nav-link" data-tab="security">
+                        <i class="fas fa-shield-alt"></i> <span>Security Audit</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="api">
+                        <i class="fas fa-key"></i> <span>API Gateways</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="email">
+                        <i class="fas fa-envelope"></i> <span>Mail Center</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="backups">
+                        <i class="fas fa-database"></i> <span>Database Backups</span>
+                    </a>
+                    <a href="#" class="nav-link" data-tab="audit">
+                        <i class="fas fa-history"></i> <span>Activity Logs</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- Bottom User & Maintenance Info -->
+            <div class="sidebar-footer">
+                <div class="maintenance-widget">
+                    <div class="widget-details">
+                        <span class="widget-label">Maintenance Mode</span>
+                        <span class="widget-status" id="maintenance-sidebar-status">Offline</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="maintenance-toggle-btn">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="current-admin">
+                    <div class="admin-avatar" id="admin-sidebar-avatar">AD</div>
+                    <div class="admin-details">
+                        <span class="admin-name" id="admin-sidebar-name">Admin User</span>
+                        <span class="admin-email" id="admin-sidebar-email">admin@movani.com</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Body -->
+        <div class="main-content">
+            <!-- Top Header -->
+            <header class="topbar">
+                <div class="header-left">
+                    <button class="toggle-sidebar" id="toggle-sidebar-btn" aria-label="Toggle Sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="header-title" id="page-title">Dashboard</h1>
+                </div>
+
+                <div class="header-right">
+                    <!-- Quick Search Bar -->
+                    <div class="quick-search">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" placeholder="Global search users or titles..." id="global-search-input">
+                    </div>
+
+                    <!-- Return to Site Link -->
+                    <a href="index.html" class="action-btn back-site-btn">
+                        <i class="fas fa-external-link-alt"></i> Return to Site
+                    </a>
+
+                    <!-- Notifications Dropdown -->
+                    <div class="notification-menu">
+                        <button class="action-btn" id="notif-bell-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="bell-badge" id="bell-badge-count" style="display: none;">0</span>
+                        </button>
+                        <div class="notif-dropdown" id="notif-dropdown-box" style="display: none;">
+                            <div class="notif-header">
+                                <span>Recent Notifications</span>
+                                <a href="#" id="clear-notifs-btn">Clear All</a>
+                            </div>
+                            <div class="notif-list" id="notif-list-container">
+                                <div class="notif-empty">No unread notifications</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Admin Profile Menu -->
+                    <div class="admin-profile-menu">
+                        <button class="profile-trigger" id="profile-trigger-btn">
+                            <span class="avatar" id="admin-header-avatar">AD</span>
+                        </button>
+                        <div class="profile-dropdown" id="profile-dropdown-box" style="display: none;">
+                            <div class="dropdown-header">
+                                <span class="profile-name" id="admin-profile-name">Site Admin</span>
+                                <span class="profile-role">Super Administrator</span>
+                            </div>
+                            <hr>
+                            <a href="#" onclick="logoutAdmin(event)"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dynamically Loaded Content Area -->
+            <main class="content-canvas" id="content-canvas">
+                <!-- Dashboard Active Panel (Default loaded) -->
+                <div class="module-panel" id="dashboard-panel">
+                    <!-- Quick Stats Cards Grid -->
+                    <div class="stats-grid" id="dashboard-stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon icon-users"><i class="fas fa-user-friends"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-label">Total Users</span>
+                                <h3 class="stat-number" id="stat-total-users">0</h3>
+                                <span class="stat-change text-success"><i class="fas fa-arrow-up"></i> +12% this week</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon icon-movies"><i class="fas fa-video"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-label">Total Movies</span>
+                                <h3 class="stat-number" id="stat-total-movies">0</h3>
+                                <span class="stat-change text-neutral">Dynamic library</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon icon-anime"><i class="fas fa-dragon"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-label">Total Anime</span>
+                                <h3 class="stat-number" id="stat-total-anime">0</h3>
+                                <span class="stat-change text-neutral">Dynamic library</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon icon-reviews"><i class="fas fa-star"></i></div>
+                            <div class="stat-info">
+                                <span class="stat-label">Total Reviews</span>
+                                <h3 class="stat-number" id="stat-total-reviews">0</h3>
+                                <span class="stat-change text-success"><i class="fas fa-arrow-up"></i> +5% this week</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Grid -->
+                    <div class="dashboard-grid">
+                        <div class="dashboard-chart-card">
+                            <div class="card-header">
+                                <h3>User Growth Analytics</h3>
+                                <span class="header-legend">Last 7 Days</span>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="chart-user-growth"></canvas>
+                            </div>
+                        </div>
+                        <div class="dashboard-chart-card">
+                            <div class="card-header">
+                                <h3>Library Distribution</h3>
+                                <span class="header-legend">Movies vs Anime</span>
+                            </div>
+                            <div class="chart-container-donut">
+                                <canvas id="chart-library-distribution"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lower Activity & Reports Segment -->
+                    <div class="dashboard-lower-grid">
+                        <!-- Recent Audit Logs widget -->
+                        <div class="dashboard-table-card">
+                            <div class="card-header">
+                                <h3>Recent System Activity</h3>
+                                <button class="view-all-link" data-target-tab="audit">View Audit Logs <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                            <div class="table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>User</th>
+                                            <th>Action</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dashboard-recent-activity-body">
+                                        <tr>
+                                            <td colspan="4" class="text-center">Loading audit trails...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Notification Toast Banners -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Modal Manager (Reusable for CRUD forms & details previews) -->
+    <div class="modal-backdrop" id="admin-modal" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-title">Modal Title</h3>
+                <button class="close-modal-btn" id="close-modal-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Insert dynamic modal form contents here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Local Controller Logic -->
+    <script src="admin.js"></script>
+</body>
+</html>

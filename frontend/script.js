@@ -132,29 +132,213 @@ async function loadReviews() {
     const data = await loadJSON();
     if (!data) return;
 
-    container.innerHTML = data.reviews.map(review => `
-        <div class="review-card">
-            <div class="review-header">
-                <div class="review-user">
-                    <div class="user-avatar">${review.avatar}</div>
-                    <div>
-                        <h4>${review.user}</h4>
-                        <span class="review-movie">${getMovieTitle(review.movieId, data)}</span>
+    container.innerHTML = data.reviews.map(review => {
+        const likedReviews = JSON.parse(localStorage.getItem('likedReviews') || '[]');
+        const reviewId = review._id || String(review.id);
+        const isLiked = likedReviews.includes(reviewId);
+        const activeClass = isLiked ? ' active' : '';
+
+        const commentsListHTML = (review.comments || []).map(comment => `
+            <div class="comment-item">
+                <div class="comment-header">
+                    <div class="comment-user-info">
+                        <div class="comment-avatar">${escapeHTML(comment.avatar || 'A')}</div>
+                        <span class="comment-username">${escapeHTML(comment.user || 'Anonymous')}</span>
+                    </div>
+                    <span class="comment-date">${formatReviewDate(comment.date)}</span>
+                </div>
+                <p class="comment-content">${escapeHTML(comment.content)}</p>
+            </div>
+        `).join('');
+
+        return `
+            <div class="review-card" data-review-id="${reviewId}">
+                <div class="review-header">
+                    <div class="review-user">
+                        <div class="user-avatar">${review.avatar}</div>
+                        <div>
+                            <h4>${review.user}</h4>
+                            <span class="review-movie">${getMovieTitle(review.movieId, data)}</span>
+                        </div>
+                    </div>
+                    <div class="review-rating">${review.rating}/10</div>
+                </div>
+                <p class="review-content">${review.content}</p>
+                <div class="review-footer">
+                    <span>${formatReviewDate(review.date)}</span>
+                    <div class="review-actions">
+                        <button class="review-action-btn like-btn${activeClass}">
+                            <i class="fas fa-thumbs-up"></i> <span class="likes-count">${review.likes}</span>
+                        </button>
+                        <button class="review-action-btn reply-btn">
+                            <i class="fas fa-comment"></i> Reply (<span class="replies-count">${(review.comments || []).length}</span>)
+                        </button>
                     </div>
                 </div>
-                <div class="review-rating">${review.rating}/10</div>
-            </div>
-            <p class="review-content">${review.content}</p>
-            <div class="review-footer">
-                <span>${formatReviewDate(review.date)}</span>
-                <div>
-                    <button class="review-action-btn">
-                        <i class="fas fa-thumbs-up"></i> ${review.likes}
-                    </button>
+                <div class="reply-section">
+                    <div class="comments-list">${commentsListHTML}</div>
+                    <form class="reply-form">
+                        <textarea class="reply-textarea" placeholder="Type your reply here..." required></textarea>
+                        <div class="reply-form-actions">
+                            <button type="button" class="reply-cancel-btn">Cancel</button>
+                            <button type="submit" class="reply-submit-btn">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
+
+    // Add delegated event listener for liking/replying to reviews
+    container.addEventListener('click', async (e) => {
+        // 1. Like button click
+        const likeBtn = e.target.closest('.like-btn');
+        if (likeBtn) {
+            const card = likeBtn.closest('.review-card');
+            if (!card) return;
+            const reviewId = card.dataset.reviewId;
+            if (!reviewId) return;
+
+            let likedReviews = JSON.parse(localStorage.getItem('likedReviews') || '[]');
+            const isLiked = likedReviews.includes(reviewId);
+            const action = isLiked ? 'unlike' : 'like';
+
+            try {
+                const likesCountSpan = likeBtn.querySelector('.likes-count');
+                let currentLikes = parseInt(likesCountSpan.textContent) || 0;
+
+                if (isLiked) {
+                    likedReviews = likedReviews.filter(id => id !== reviewId);
+                    likeBtn.classList.remove('active');
+                    likesCountSpan.textContent = Math.max(0, currentLikes - 1);
+                } else {
+                    likedReviews.push(reviewId);
+                    likeBtn.classList.add('active');
+                    likesCountSpan.textContent = currentLikes + 1;
+                }
+                localStorage.setItem('likedReviews', JSON.stringify(likedReviews));
+
+                const response = await fetch(`/api/reviews/${reviewId}/like`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action })
+                });
+                const result = await response.json();
+                if (result.success && result.likes !== undefined) {
+                    likesCountSpan.textContent = result.likes;
+                }
+            } catch (err) {
+                console.error('Error toggling like:', err);
+            }
+            return;
+        }
+
+        // 2. Reply toggle button click
+        const replyBtn = e.target.closest('.reply-btn');
+        if (replyBtn) {
+            const card = replyBtn.closest('.review-card');
+            if (!card) return;
+            const replySection = card.querySelector('.reply-section');
+            if (!replySection) return;
+
+            const isExpanded = replySection.style.display === 'block';
+            replySection.style.display = isExpanded ? 'none' : 'block';
+            return;
+        }
+
+        // 3. Cancel button click
+        const cancelBtn = e.target.closest('.reply-cancel-btn');
+        if (cancelBtn) {
+            const card = cancelBtn.closest('.review-card');
+            if (!card) return;
+            const replySection = card.querySelector('.reply-section');
+            if (replySection) replySection.style.display = 'none';
+            return;
+        }
+    });
+
+    // Attach submit event listener for reply forms
+    container.querySelectorAll('.reply-form').forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const card = form.closest('.review-card');
+            if (!card) return;
+            const reviewId = card.dataset.reviewId;
+            if (!reviewId) return;
+
+            const textarea = form.querySelector('.reply-textarea');
+            const commentContent = textarea.value.trim();
+            if (!commentContent) return;
+
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                alert('You must be logged in to reply to a review.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const submitBtn = form.querySelector('.reply-submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            const payload = {
+                userId: currentUser.id,
+                user: currentUser.displayName || currentUser.username,
+                avatar: (currentUser.displayName || currentUser.username).substring(0, 2).toUpperCase(),
+                content: commentContent
+            };
+
+            try {
+                const response = await fetch(`/api/reviews/${reviewId}/comments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (response.status === 201 && result.success && result.comments) {
+                    const listContainer = card.querySelector('.comments-list');
+                    if (listContainer) {
+                        listContainer.innerHTML = result.comments.map(comment => `
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <div class="comment-user-info">
+                                        <div class="comment-avatar">${escapeHTML(comment.avatar || 'A')}</div>
+                                        <span class="comment-username">${escapeHTML(comment.user || 'Anonymous')}</span>
+                                    </div>
+                                    <span class="comment-date">${formatReviewDate(comment.date)}</span>
+                                </div>
+                                <p class="comment-content">${escapeHTML(comment.content)}</p>
+                            </div>
+                        `).join('');
+                        listContainer.scrollTop = listContainer.scrollHeight;
+                    }
+                    const replyCountSpan = card.querySelector('.replies-count');
+                    if (replyCountSpan) replyCountSpan.textContent = result.comments.length;
+
+                    textarea.value = '';
+                } else {
+                    alert(result.message || 'Failed to submit reply.');
+                }
+            } catch (err) {
+                console.error('Error submitting reply:', err);
+                alert('Connection error occurred while submitting reply.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+            }
+        });
+    });
+}
+
+function escapeHTML(str) {
+    if (!str) return '';
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 }
 
 function formatReviewDate(dateString) {
@@ -190,8 +374,8 @@ function createMovieCard(item) {
                 <img src="${item.poster}" alt="${item.title}" class="movie-poster" loading="lazy">
                 <span class="movie-type ${item.type}">${item.type.toUpperCase()}</span>
                 <div class="movie-actions">
-                    <a href="details.html?id=${item.id}&type=${item.type}" class="view-btn">View</a>
-                    <a href="add-review.html?id=${item.id}&type=${item.type}" class="review-btn">Review</a>
+                    <a href="details.html?id=${item.id}&type=${item.type}" class="view-btn"><i class="fas fa-eye"></i> View Details</a>
+                    <a href="add-review.html?id=${item.id}&type=${item.type}" class="review-btn"><i class="fas fa-edit"></i> Write Review</a>
                 </div>
             </div>
             <div class="movie-info">

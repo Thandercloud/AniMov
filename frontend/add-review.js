@@ -510,6 +510,13 @@ function setupFormSubmit() {
                 allReviews.unshift(result.review);
                 filterAndRenderReviews();
 
+                // Reset submit button state
+                submitBtn.disabled = false;
+                if (btnText && btnSpinner) {
+                    btnText.style.display = 'inline-block';
+                    btnSpinner.style.display = 'none';
+                }
+
                 // Success Modal trigger
                 showSuccessModal();
             } else {
@@ -562,42 +569,8 @@ function viewSelectedReview() {
 }
 
 function writeAnotherReview() {
-    // Reset modal
-    const modal = document.getElementById('success-modal');
-    if (modal) modal.style.display = 'none';
-
-    // Clear variables
-    currentRating = 0;
-    highlightStars(0);
-    document.getElementById('rating-label').textContent = 'Select a rating';
-
-    selectedTitle = null;
-    document.getElementById('selected-title-badge').style.display = 'none';
-    const searchInput = document.getElementById('title-search');
-    if (searchInput) {
-        searchInput.style.display = 'block';
-        searchInput.value = '';
-    }
-
-    // Reset simple fields
-    document.getElementById('review-title').value = '';
-    document.getElementById('review-content').value = '';
-
-    // Clear error displays
-    document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
-    document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
-    const errorBanner = document.getElementById('form-error-banner');
-    if (errorBanner) errorBanner.style.display = 'none';
-
-    // Re-enable submit button
-    const submitBtn = document.getElementById('submit-review-btn');
-    submitBtn.disabled = false;
-    const btnText = submitBtn.querySelector('.btn-text');
-    const btnSpinner = submitBtn.querySelector('.btn-spinner');
-    if (btnText && btnSpinner) {
-        btnText.style.display = 'inline-block';
-        btnSpinner.style.display = 'none';
-    }
+    // Refresh page cleanly to clear form and update the reviews feed
+    window.location.href = 'add-review.html';
 }
 
 function goHome() {

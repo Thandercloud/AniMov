@@ -1,10 +1,17 @@
 const fs = require('fs');
 const path = require('path');
+const bcrypt = require('bcryptjs');
 const Movie = require('../models/Movie');
 const Anime = require('../models/Anime');
 const Review = require('../models/Review');
 const User = require('../models/User');
 const Watchlist = require('../models/Watchlist');
+const Report = require('../models/Report');
+const ContentRequest = require('../models/ContentRequest');
+const SystemSettings = require('../models/SystemSettings');
+const Notification = require('../models/Notification');
+const ActivityLog = require('../models/ActivityLog');
+const Ad = require('../models/Ad');
 
 const SEED_FILE = path.join(__dirname, '../../db.json');
 
@@ -18,6 +25,12 @@ const seedDatabase = async () => {
         await Review.createCollection();
         await User.createCollection();
         await Watchlist.createCollection();
+        await Report.createCollection();
+        await ContentRequest.createCollection();
+        await SystemSettings.createCollection();
+        await Notification.createCollection();
+        await ActivityLog.createCollection();
+        await Ad.createCollection();
         console.log('MongoDB: All collections verified/created.');
 
         // Load seed data if available
@@ -168,8 +181,39 @@ const seedDatabase = async () => {
                     stats: { reviews: 2, watchlist: 4, following: 24, followers: 18 }
                 }
             ];
-            await User.insertMany(usersToInsert);
-            console.log(`MongoDB: Seeded ${usersToInsert.length} users.`);
+            const salt = await bcrypt.genSalt(10);
+            const normalizedUsers = await Promise.all(usersToInsert.map(async u => {
+                let password = u.password;
+                if (!/^\$2[ayb]\$\d+\$[./A-Za-z0-9]{53}$/.test(password)) {
+                    password = await bcrypt.hash(password, salt);
+                }
+                return {
+                    ...u,
+                    password,
+                    role: u.role || 'user'
+                };
+            }));
+            await User.insertMany(normalizedUsers);
+            console.log(`MongoDB: Seeded ${normalizedUsers.length} users.`);
+        }
+
+        // Ensure default admin user exists
+        const adminExists = await User.findOne({ role: 'admin' });
+        if (!adminExists) {
+            console.log('MongoDB: No admin user found. Creating default admin...');
+            const defaultAdmin = new User({
+                id: 111111,
+                username: 'admin',
+                email: 'admin@movani.com',
+                password: 'admin123',
+                displayName: 'Site Admin',
+                avatar: 'AD',
+                joined: new Date(),
+                role: 'admin',
+                stats: { reviews: 0, watchlist: 0, following: 0, followers: 0 }
+            });
+            await defaultAdmin.save();
+            console.log('MongoDB: Seeded default admin user (admin@movani.com / admin123).');
         }
 
         // 6. Seed Watchlist
@@ -191,6 +235,70 @@ const seedDatabase = async () => {
             ];
             await Watchlist.insertMany(watchlistToInsert);
             console.log(`MongoDB: Seeded ${watchlistToInsert.length} watchlist items.`);
+        }
+
+        // 7. Seed System Settings
+        const settingsCount = await SystemSettings.countDocuments();
+        if (settingsCount === 0) {
+            console.log('MongoDB: Seeding default system settings...');
+            const defaultSettings = [
+                { key: 'maintenanceMode', value: false },
+                { key: 'blockedIPs', value: [] },
+                { key: 'siteName', value: 'MovAni' },
+                { key: 'logoUrl', value: '' },
+                { key: 'faviconUrl', value: '' },
+                { key: 'footerText', value: '© 2025 MovAni. All rights reserved.' },
+                { key: 'theme', value: 'dark' },
+                { key: 'contactEmail', value: 'support@movani.com' },
+                { key: 'genres', value: ['Action', 'Adventure', 'Animation', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Mystery', 'Romance', 'Sci-Fi', 'Supernatural', 'Thriller'] }
+            ];
+            await SystemSettings.insertMany(defaultSettings);
+            console.log('MongoDB: Seeded default system settings.');
+        }
+
+        // 8. Seed Ads
+        const adCount = await Ad.countDocuments();
+        if (adCount === 0) {
+            console.log('MongoDB: Seeding default ads...');
+            const defaultAds = [
+                { id: 1, title: 'Premium Movie Streaming', imageUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80', targetUrl: 'https://unsplash.com', slot: 'sidebar', clicks: 120, impressions: 5400, active: true },
+                { id: 2, title: 'Join our Anime Discord', imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80', targetUrl: 'https://discord.com', slot: 'banner', clicks: 450, impressions: 12000, active: true }
+            ];
+            await Ad.insertMany(defaultAds);
+            console.log('MongoDB: Seeded default ads.');
+        }
+
+        // 9. Seed Reports
+        const reportsCount = await Report.countDocuments();
+        if (reportsCount === 0) {
+            console.log('MongoDB: Seeding default reports...');
+            const defaultReports = [
+                { id: 1, reporterId: 999999, reporterName: 'demo_user', contentType: 'review', contentId: 1001, reason: 'Spoiler not marked', details: 'The review reveals major ending plot points of Dune Part Two without ticking the spoiler box.', status: 'pending', date: new Date() }
+            ];
+            await Report.insertMany(defaultReports);
+            console.log('MongoDB: Seeded default reports.');
+        }
+
+        // 10. Seed Notifications
+        const notifCount = await Notification.countDocuments();
+        if (notifCount === 0) {
+            console.log('MongoDB: Seeding default notifications...');
+            const defaultNotifs = [
+                { id: 1, userId: 0, title: 'Welcome to MovAni!', message: 'Explore the site and share your reviews on the latest movies and anime series.', type: 'info', read: false, date: new Date() }
+            ];
+            await Notification.insertMany(defaultNotifs);
+            console.log('MongoDB: Seeded default notifications.');
+        }
+
+        // 11. Seed Activity Logs
+        const logsCount = await ActivityLog.countDocuments();
+        if (logsCount === 0) {
+            console.log('MongoDB: Seeding default activity logs...');
+            const defaultLogs = [
+                { id: 1, userId: 111111, username: 'admin', action: 'System Init', details: 'Seeded initial database structure and configurations', ip: '127.0.0.1', date: new Date() }
+            ];
+            await ActivityLog.insertMany(defaultLogs);
+            console.log('MongoDB: Seeded default activity logs.');
         }
 
         console.log('✓ MongoDB Seeding Check Completed Successfully');

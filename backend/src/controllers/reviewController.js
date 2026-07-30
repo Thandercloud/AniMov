@@ -150,10 +150,74 @@ const deleteReview = async (req, res, next) => {
     }
 };
 
+// POST /api/reviews/:id/like
+const likeReview = async (req, res, next) => {
+    try {
+        const { action } = req.body; // "like" or "unlike"
+        const amount = action === 'unlike' ? -1 : 1;
+
+        const review = await Review.findOneAndUpdate(
+            findReviewQuery(req.params.id),
+            { $inc: { likes: amount } },
+            { new: true }
+        );
+
+        if (!review) {
+            return res.status(404).json({ success: false, message: 'Review not found' });
+        }
+
+        // Keep likes >= 0
+        if (review.likes < 0) {
+            review.likes = 0;
+            await review.save();
+        }
+
+        res.json({ success: true, likes: review.likes });
+    } catch (err) {
+        next(err);
+    }
+};
+
+// POST /api/reviews/:id/comments
+const addComment = async (req, res, next) => {
+    try {
+        const { userId, user, avatar, content } = req.body;
+        
+        if (!content || !content.trim()) {
+            return res.status(400).json({ success: false, message: 'Comment content is required.' });
+        }
+
+        const commentObj = {
+            id: Date.now(),
+            userId: Number(userId) || 0,
+            user: user || 'Anonymous',
+            avatar: avatar || 'A',
+            content: content.trim(),
+            date: new Date().toISOString()
+        };
+
+        const review = await Review.findOneAndUpdate(
+            findReviewQuery(req.params.id),
+            { $push: { comments: commentObj } },
+            { new: true }
+        );
+
+        if (!review) {
+            return res.status(404).json({ success: false, message: 'Review not found' });
+        }
+
+        res.status(201).json({ success: true, comments: review.comments });
+    } catch (err) {
+        next(err);
+    }
+};
+
 module.exports = {
     getAllReviews,
     getReviewById,
     createReview,
     updateReview,
-    deleteReview
+    deleteReview,
+    likeReview,
+    addComment
 };
